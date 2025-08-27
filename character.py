@@ -18,4 +18,5 @@ class Player(Character):
     def __init__(self,name:str,max_hp:int):
         super().__init__(name,max_hp)
     cards = []
+    lines = []
     mana = 10
