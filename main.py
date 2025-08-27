@@ -11,7 +11,7 @@ SCREEN_HEIGHT = 1536 / 2
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("도키도키 파이썬")
 
-# 색상들 (더 나은 RGB 있으면 넣어주세요)
+# 색상들 (더 나은 RGB 있으면 넣어주세요!)
 WHITE = (247, 247, 247)
 BLACK = (0, 0, 0)
 TEXT_COLOR = WHITE
@@ -135,36 +135,26 @@ while running:
             if event.button == 1: # 왼쪽 마우스 버튼
                 for button in buttons:
                     button.handle_click()
-
     # 업데이트
     for button in buttons:
         button.check_hover(mouse_pos)
-
     # 파티클 생성
     if heart_particle_image and random.randint(0, 10) == 0:
         x = random.randint(0, int(SCREEN_WIDTH))
         particles.append(Particle(x, -100, heart_particle_image.copy()))
-
     # 파티클 업데이트 및 제거
     particles = [p for p in particles if p.update()]
-
-
     # 그리기
     screen.blit(background_image, (0, 0))
-
     # 파티클 그리기
     for p in particles:
         p.draw(screen)
-
     if logo_image:
         screen.blit(logo_image, logo_rect)
-    
     for button in buttons:
         button.draw(screen)
-
     pygame.display.flip()
     clock.tick(60)
-
 # --- 종료 ---
 pygame.quit()
 sys.exit()
