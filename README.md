@@ -43,13 +43,17 @@
 ## 카드개요
 ### VALUE 카드
 - 값을 가지는 카드들입니다.  
-- int(10) 부터 enemy.hp / 2 같은 카드들도 있습니다.
+- 예시) 10 , enemy.hp / 2
 
 ### FUNC 카드
 - 함수 카드들입니다.  
 - 특정 동작을 실행하거나 값을 변경하기 위한 setter 연산자가 포함된 카드들입니다.  
-- 예시) player.draw_cards(   ) , enemy.hp -= 등이 여기에 해당합니다
+- 예시) [ player.draw_cards(   ) ], [ enemy.hp -= ]등이 여기에 해당합니다
 
 ### COMB 카드
 - FUNC 와 VALUE가 미리 합쳐진 카드입니다.  
-- player.max_hp += 50 같은 카드가 해당합니다.  
+- 예시) [ player.max_hp += 50 ]
+
+### MUL 카드
+- 앞에 VALUE 가 필요한 곱연산이 포함된 연산 카드입니다.
+- 예시) [ * 2 ] [ / 2 ]
