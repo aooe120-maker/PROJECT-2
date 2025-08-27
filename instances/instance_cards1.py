@@ -19,5 +19,7 @@ Card(name="100",cat=Category.VALUE, cast=400 ,color=Color.RED, cost=50),
 Card(name="player.hp +=",cat=Category.FUNC, cast=Func("add_hp",False) ,color=Color.WHITE, cost=5),
 Card(name="enemy.hp -=",cat=Category.FUNC, cast=Func("reduce_hp",True) ,color=Color.WHITE, cost=5),
 Card(name="player.draw_card(   )",cat=Category.FUNC, cast=Func("draw_card",True) ,color=Color.WHITE, cost=5)
-
+Card(name="enemy.cost -=", cat=Category.FUNC, cast=Func("reduce_cost", False), color=Color.BLACK, cost=5)
+Card(name="player.hp +=", cat=Category.FUNC, cast=Func("add_hp", True), color=Color.RED, cost=5)
+Card(name="player.cost +=", cat=Category.FUNC, cast=Func("add_cost", True), color=Color.GREEN, cost=5)
 ]
