@@ -1,47 +1,125 @@
 import pygame
 import sys
 import random
+from game import Game
+import scene
+class Status:
+    MENU_MAIN = 0
+    MENU_LOAD = 1
+    IN_GAME = 2
+class GameLoop:
+    def __init__(self):
+        pygame.init()
+        self.screen_width = 1024 / 2
+        self.screen_height = 1536 / 2
+        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
+        pygame.display.set_caption("도키도키 파이썬")
+        self.clock = pygame.time.Clock()
+        self.running = True
+        self.status = Status.MENU_MAIN
+        # 색상
+        self.white = (247, 247, 247)
+        self.black = (0, 0, 0)
+        self.text_color = self.white
+        self.button_color = (51, 56, 160)
+        self.button_hover_color = (252, 198, 29)
+        self.button_border_color = self.white
+        self.shadow_color = (50, 50, 50)
+        # 폰트
+        try:
+            self.button_font = pygame.font.Font("font/font.otf", 25)
+        except FileNotFoundError:
+            self.button_font = pygame.font.Font(None, 30)
+        # 이미지
+        self.load_images()
+        # 타이틀 신 요소
+        self.particles = []
+        self.buttons = []
+        self.create_main_menu_buttons()
+        self.game = Game()
+        scene.game = self.game
 
-# 초기화
-pygame.init()
+    def load_images(self):
+        try:
+            self.background_image = pygame.image.load('sprites/cover.png').convert()
+            self.background_image = pygame.transform.scale(self.background_image, (self.screen_width, self.screen_height))
+            self.logo_image = pygame.image.load('sprites/logo.png').convert_alpha()
+            self.logo_rect = self.logo_image.get_rect(center=(self.screen_width / 2, self.screen_height / 2 - 150))
+            self.heart_particle_image = pygame.image.load('sprites/heart_particle.png').convert_alpha()
+        except pygame.error as e:
+            print(f"이미지 로드 오류: {e}")
+            self.background_image = pygame.Surface((self.screen_width, self.screen_height))
+            self.background_image.fill(self.black)
+            self.logo_image = None
+            self.heart_particle_image = None
 
-# 화면 설정
-SCREEN_WIDTH = 1024 / 2
-SCREEN_HEIGHT = 1536 / 2
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("도키도키 파이썬")
+    def create_main_menu_buttons(self):
+        button_width = 280
+        button_height = 70
+        button_x = (self.screen_width - button_width) / 2
+        button_y_start = self.screen_height / 2
 
-# 색상들 (더 나은 RGB 있으면 넣어주세요!)
-WHITE = (247, 247, 247)
-BLACK = (0, 0, 0)
-TEXT_COLOR = WHITE
-BUTTON_COLOR = (51, 56, 160)
-BUTTON_HOVER_COLOR = (252, 198, 29)
-BUTTON_BORDER_COLOR = (255, 255, 255)
-SHADOW_COLOR = (50, 50, 50)
+        self.buttons = [
+            Button("게임 시작", button_x, button_y_start, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.start_game),
+            Button("불러오기", button_x, button_y_start + 90, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.load_game),
+            Button("나가기", button_x, button_y_start + 180, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.exit_game)
+        ]
 
+    def start_game(self):
+        print("게임 시작 버튼 클릭됨")
+        self.game.play()
+    def load_game(self):
+        print("불러오기 버튼 클릭됨")
 
-# 폰트 설정
-try:
-    button_font = pygame.font.Font("font/font.otf", 25)
-except FileNotFoundError:
-    button_font = pygame.font.Font(None, 30)
+    def exit_game(self):
+        self.running = False
 
-# 이미지 로드
-try:
-    background_image = pygame.image.load('sprites/cover.png').convert()
-    background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
-    logo_image = pygame.image.load('sprites/logo.png').convert_alpha()
-    logo_rect = logo_image.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150))
-    heart_particle_image = pygame.image.load('sprites/heart_particle.png').convert_alpha()
-except pygame.error as e:
-    print(f"이미지 로드 오류: {e}")
-    background_image = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-    background_image.fill(BLACK)
-    logo_image = None
-    heart_particle_image = None
+    def run(self):
+        while self.running:
+            self.handle_events()
+            self.update()
+            self.draw()
+            self.clock.tick(60)
+        
+        pygame.quit()
+        sys.exit()
 
-# 파티클 클래스
+    def handle_events(self):
+        mouse_pos = pygame.mouse.get_pos()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    for button in self.buttons:
+                        if button.is_hovered:
+                            button.handle_click()
+
+    def update(self):
+        mouse_pos = pygame.mouse.get_pos()
+        for button in self.buttons:
+            button.check_hover(mouse_pos)
+
+        if self.heart_particle_image and random.randint(0, 10) == 0:
+            x = random.randint(0, int(self.screen_width))
+            self.particles.append(Particle(x, -100, self.heart_particle_image.copy()))
+        
+        self.particles = [p for p in self.particles if p.update()]
+
+    def draw(self):
+        self.screen.blit(self.background_image, (0, 0))
+
+        for p in self.particles:
+            p.draw(self.screen)
+
+        if self.logo_image:
+            self.screen.blit(self.logo_image, self.logo_rect)
+
+        for button in self.buttons:
+            button.draw(self.screen)
+
+        pygame.display.flip()
+
 class Particle:
     def __init__(self, x, y, image):
         self.x = x
@@ -61,7 +139,6 @@ class Particle:
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
 
-# --- 버튼 클래스 ---
 class Button:
     def __init__(self, text, x, y, width, height, color, hover_color, border_color, shadow_color, action=None):
         self.rect = pygame.Rect(x, y, width, height)
@@ -73,18 +150,22 @@ class Button:
         self.text = text
         self.action = action
         self.is_hovered = False
+        
+        # 폰트 설정
+        try:
+            self.font = pygame.font.Font("font/font.otf", 25)
+        except FileNotFoundError:
+            self.font = pygame.font.Font(None, 30)
 
     def draw(self, screen):
-        # 그림자
         pygame.draw.rect(screen, self.shadow_color, self.shadow_rect, border_radius=15)
-        # 보더
         pygame.draw.rect(screen, self.border_color, self.rect, border_radius=15)
-        # 버튼
+        
         current_color = self.hover_color if self.is_hovered else self.color
         inner_rect = self.rect.inflate(-6, -6)
         pygame.draw.rect(screen, current_color, inner_rect, border_radius=12)
         
-        text_surf = button_font.render(self.text, True, TEXT_COLOR)
+        text_surf = self.font.render(self.text, True, (247, 247, 247))
         text_rect = text_surf.get_rect(center=self.rect.center)
         screen.blit(text_surf, text_rect)
 
@@ -95,66 +176,6 @@ class Button:
         if self.is_hovered and self.action:
             self.action()
 
-# 버튼 액션 함수
-def start_game():
-    print("게임 시작 버튼 클릭됨")
-
-def load_game():
-    print("불러오기 버튼 클릭됨")
-
-def exit_game():
-    pygame.quit()
-    sys.exit()
-
-# 버튼 인스턴스
-button_width = 280
-button_height = 70
-button_x = (SCREEN_WIDTH - button_width) / 2
-button_y_start = SCREEN_HEIGHT / 2
-
-buttons = [
-    Button("게임 시작", button_x, button_y_start, button_width, button_height, BUTTON_COLOR, BUTTON_HOVER_COLOR, BUTTON_BORDER_COLOR, SHADOW_COLOR, start_game),
-    Button("불러오기", button_x, button_y_start + 90, button_width, button_height, BUTTON_COLOR, BUTTON_HOVER_COLOR, BUTTON_BORDER_COLOR, SHADOW_COLOR, load_game),
-    Button("나가기", button_x, button_y_start + 180, button_width, button_height, BUTTON_COLOR, BUTTON_HOVER_COLOR, BUTTON_BORDER_COLOR, SHADOW_COLOR, exit_game)
-]
-
-
-particles = []
-
-#메인 게임 루프
-running = True
-clock = pygame.time.Clock()
-
-while running:
-    mouse_pos = pygame.mouse.get_pos()
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1: # 왼쪽 마우스 버튼
-                for button in buttons:
-                    button.handle_click()
-    # 업데이트
-    for button in buttons:
-        button.check_hover(mouse_pos)
-    # 파티클 생성
-    if heart_particle_image and random.randint(0, 10) == 0:
-        x = random.randint(0, int(SCREEN_WIDTH))
-        particles.append(Particle(x, -100, heart_particle_image.copy()))
-    # 파티클 업데이트 및 제거
-    particles = [p for p in particles if p.update()]
-    # 그리기
-    screen.blit(background_image, (0, 0))
-    # 파티클 그리기
-    for p in particles:
-        p.draw(screen)
-    if logo_image:
-        screen.blit(logo_image, logo_rect)
-    for button in buttons:
-        button.draw(screen)
-    pygame.display.flip()
-    clock.tick(60)
-# --- 종료 ---
-pygame.quit()
-sys.exit()
+if __name__ == '__main__':
+    gameloop = GameLoop()
+    gameloop.run()

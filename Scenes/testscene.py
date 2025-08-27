@@ -1,8 +1,13 @@
-from scene import *
-def scene_test(game:Game):
+# 씬 정보
+name = "테스트"
+stage = 0 # 작동하는 스테이지
+req_like=(0,'=') # (요구 호감도 , '=' : 같을때 '<' : 같거나 높을때 '>' : 같거나 낮을때)
+is_couple=False # 커플일때만 발동되는 씬인지
+
+def script(game):
     game.background("sprites/cover.png")
     game.img("sprites/smile.png") # 캐릭터 이미지 변경 (직접 추가해도 됩니다)
-    game.n("")
+    game.n("화창한 날씨다.")
     game.p("안녕!") # 상대 대사 출력
     game.p("이건 테스트 씬이야!")
     game.sel("반가워","저리가") # 선택지
@@ -15,14 +20,6 @@ def scene_test(game:Game):
         game.img("sprites/angry.png")
         game.p("저리가라니!")
         game.me("말이 헛나왔구나 미안하다")
+    game.p("테스트 성공")
     game.stage += 1
     game.end()
-
-game.scenes.append(Scene(
-name="테스트",
-stage=0, # 작동하는 스테이지
-script=scene_test, # 작성한 스크립트
-game=game, # 게임 객체
-req_like=(0,'='), # (요구 호감도 , '=' : 같을때 '<' : 같거나 높을때 '>' : 같거나 낮을때)
-is_couple=False # 커플일때만 발동되는 이벤트인지
-))
