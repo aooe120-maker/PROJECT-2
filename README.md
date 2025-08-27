@@ -1,5 +1,7 @@
-## 프로젝트 2팀  
-팀원 : 강현정 , 이건우(팀장) , 최재홍  
+<p align="center">
+  <img src="sprites/logo.png" alt="로고" width="300"/><br>
+  <b>도키도키 파이썬!</b>
+</p>
 
-![로고](sprites/logo.png)
-
+## 개요
+- 설명을 적어주세요
