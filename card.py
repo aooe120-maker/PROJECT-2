@@ -43,7 +43,7 @@ class Line():
     value:Value = None
     func:Func = None
     cards = None
-    def runable(self) ->bool:
+    def runable(self) -> bool:
         return self.code and self.func
     def set_value(self,value,mul=False):
         if mul:
