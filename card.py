@@ -1,21 +1,6 @@
+
 from enum import Enum
 from character import Character
-
-
-"""
-구현할 아이디어들
-enemy.damage_every_turn(   ) # FUNC , 매턴 (    ) 만큼 데미지
-enemy.clear() # FUNC , 적의 다음 턴 행동을 무력화
-for i in range(   ) # FUNC , 기본적인 for 문
-
-
-"""
-
-
-
-
-from enum import Enum
-import operator
 
 """
 구현할 아이디어들
