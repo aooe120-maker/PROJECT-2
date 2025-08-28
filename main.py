@@ -43,7 +43,7 @@ class GameLoop:
             self.name_font = pygame.font.Font(None, 24)
 
         # 리소스
-        self.menu_background = self.safe_load_image('sprites/cover.png', scale_to=(self.screen_width, self.screen_height))
+        self.menu_background = self.safe_load_image('sprites/cover.jpg', scale_to=(self.screen_width, self.screen_height))
         self.logo_image = self.safe_load_image('sprites/logo.png', alpha=True)
         self.logo_rect = self.logo_image.get_rect(center=(self.screen_width // 2, self.screen_height // 2 - 150)) if self.logo_image else None
 
