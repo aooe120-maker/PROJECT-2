@@ -1,56 +1,62 @@
+import threading
 import scene
+from bridge import UIBridge
 
 class Game():
-    def __init__(self):
+    def __init__(self, bridge: UIBridge):
+        self.bridge = bridge
         self.all_scenes = scene.load_scenes(self)
-    played_scenes = []
-    like = 0
-    stage = 0
-    is_couple = False
-    choice = 0
-    current_scene : scene.Scene = None
-    # 씬에서 불러와 사용할 함수
-    def p(self,script,effect = None ): #effect는 나중에 구현해보도록 하겠습니다. (예: 효과음)
-        # 상대방이 하는 말
-        print(f"써니: {script}") # 임시로 콘솔출력
-        input()
-        pass
-    def me(self,script):
-        # 플레이어가 하는 말
-        print(f"나: {script}") # 임시로 콘솔출력
-        input()
-    def other(self,script,name = "?",effect = None):
-        # 다른 캐릭터가 하는말
-        print(f"{name}: {script}") # 임시로 콘솔출력
-        input()
-    def n(self,script):
-        # 나레이션이 하는말
-        print(f"[ {script} ]")
-        input()
-    def background(self,file):
-        #change background to file
-        pass
-    def img(self,file):
-        #change chracter(thony) img to file
-        pass
-    def sel(self,*choice):
-        for choice in choice:
-            print(choice)
-        # make button to choose
-        self.choice = int(input()) #pass
+        self.played_scenes = []
+
+        # 변수들
+        self.like = 0 # 호감도
+        self.interest = 0 # 흥미도
+        self.belive = 0 # 신뢰도
+
+        self.stage = 0 # 현재 스테이지
+        self.is_couple = False # 커플인지
+        self.choice = 0
+        self.current_scene: scene.Scene | None = None
+        self._worker: threading.Thread | None = None
+
+    def p(self, script, effect=None):
+        self.bridge.show_text("써니", script)
+
+    def me(self, script):
+        self.bridge.show_text("나", script)
+
+    def other(self, script, name="?", effect=None):
+        self.bridge.show_text(name, script)
+
+    def n(self, script):
+        self.bridge.show_text("", f"[ {script} ]")
+
+    def background(self, file):
+        self.bridge.set_bg(file)
+
+    def img(self, file):
+        self.bridge.set_img(file)
+
+    def sel(self, *choice):
+        idx = self.bridge.ask_choice(list(choice))
+        self.choice = idx + 1
+        return self.choice
+
     def end(self):
-        # close the scene
-        pass
-    # 게임 시스템 관련
+        self.bridge.mark_end()
+
+    def _run_scene(self):
+        self.pick_a_scene()
+
     def pick_a_scene(self):
         scenes_filtered = [s for s in self.all_scenes if s.req_like[0] <= self.like]
         self.current_scene = scenes_filtered[0]
         self.played_scenes.append(self.current_scene)
         self.current_scene.play()
-        pass
-    def save_game(self):
-        pass
-    def load_game(self):
-        pass
+        self.end()
+
     def play(self):
-        self.pick_a_scene()
+        if self._worker and self._worker.is_alive():
+            return
+        self._worker = threading.Thread(target=self._run_scene, daemon=True)
+        self._worker.start()
