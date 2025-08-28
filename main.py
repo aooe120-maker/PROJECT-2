@@ -20,21 +20,24 @@ class GameLoop:
         self.clock = pygame.time.Clock()
         self.running = True
         self.status = Status.MENU_MAIN
+        self.d_alpha = 0
+        self.is_fading = False
+        self.is_unfading = False
 
         # 색상
         self.white = (247, 247, 247)
         self.black = (0, 0, 0)
         self.text_color = self.white
         self.box_color = (0, 0, 0, 180)  # 반투명
-        self.button_color = (51, 56, 160)
-        self.button_hover_color = (252, 198, 29)
+        self.button_color = (51, 56, 160, 180)
+        self.button_hover_color = (252, 198, 29, 180)
         self.button_border_color = self.white
-        self.shadow_color = (50, 50, 50)
+        self.shadow_color = (50, 50, 50, 50)
         self.name_plate_color = (255, 255, 255)
 
         # 폰트
         try:
-            self.button_font = pygame.font.Font("font/font.otf", 25)
+            self.button_font = pygame.font.Font("font/font.otf", 20)
             self.text_font = pygame.font.Font("font/font.otf", 24)
             self.name_font = pygame.font.Font("font/font.otf", 22)
         except FileNotFoundError:
@@ -68,6 +71,10 @@ class GameLoop:
         self.dialog_box_rect = pygame.Rect(20, self.screen_height - 200, self.screen_width - 40, 150)
         self.text_rect = pygame.Rect(self.dialog_box_rect.x + 16, self.dialog_box_rect.y + 48, self.dialog_box_rect.width - 32, self.dialog_box_rect.height - 60)
         self.name_plate_rect = pygame.Rect(self.dialog_box_rect.x + 16, self.dialog_box_rect.y - 26, 200, 26)
+
+        # 페이드
+        self.fade_rect = pygame.Rect(0,self.screen_height,self.screen_width,0)
+        self.fade_alpha = 0
 
         # 타이핑 이펙트
         self.typing_full = ""
@@ -112,6 +119,8 @@ class GameLoop:
     def exit_game(self):
         self.running = False
 
+
+    # 실행 (메인함수)
     def run(self):
         while self.running:
             dt = self.clock.tick(60) / 1000.0
@@ -120,6 +129,8 @@ class GameLoop:
             self.draw()
         pygame.quit()
         sys.exit()
+
+    # 디버그 진입
     def _start_debug_scene(self, scene_obj):
         self.status = Status.IN_GAME
         self.bridge.state.mode = "idle"
@@ -129,11 +140,13 @@ class GameLoop:
         import threading
         t = threading.Thread(target=scene_obj.play, daemon=True)
         t.start()
+    
+    # 이벤트 핸들러
     def handle_events(self):
-        mouse_pos = pygame.mouse.get_pos()
+        mouse_pos = pygame.mouse.get_pos() # 마우스 좌표받기
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.running = False
+                self.running = False # 종료
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if self.status == Status.MENU_MAIN:
                     for b in self.buttons:
@@ -164,8 +177,6 @@ class GameLoop:
                 if event.key == pygame.K_F2:
                     self.status = Status.MENU_DEBUG
                     self.debug_buttons:Button = self._build_debug_scene_buttons()
-                
-
         if self.status == Status.MENU_MAIN:
             for b in self.buttons:
                 b.check_hover(mouse_pos)
@@ -174,14 +185,10 @@ class GameLoop:
             if state.mode == "choice":
                 for b in self.choice_buttons:
                     b.check_hover(mouse_pos)
-
     def update(self, dt: float):
-
         if self.status != Status.IN_GAME:
             return
-
         state = self.bridge.get_state()
-
         if state.bg != self.current_bg_path:
             self.current_bg_path = state.bg
             if self.current_bg_path:
@@ -191,7 +198,6 @@ class GameLoop:
                     if img:
                         self.current_bg = pygame.transform.smoothscale(img, (self.screen_width, self.screen_height))
                         self.bg_cache[self.current_bg_path] = self.current_bg
-
         if state.img != self.current_img_path:
             self.current_img_path = state.img
             if self.current_img_path:
@@ -203,6 +209,25 @@ class GameLoop:
                         w = int(img.get_width() * (h / img.get_height()))
                         self.current_char = pygame.transform.smoothscale(img, (w, h))
                         self.char_cache[self.current_img_path] = self.current_char
+        if state.fade == "out" and not self.is_fading:
+            self.is_fading = True
+            self.is_unfading = False
+        elif state.fade == "in" and not self.is_unfading:
+            self.is_unfading = True
+            self.is_fading = False
+
+        speed = 600  # alpha per second
+        if self.is_fading:
+            self.fade_alpha = min(255, self.fade_alpha + int(speed * dt))
+            if self.fade_alpha >= 255:
+                self.is_fading = False
+                self.bridge.ui_fade_done()
+
+        if self.is_unfading:
+            self.fade_alpha = max(0, self.fade_alpha - int(speed * dt))
+            if self.fade_alpha <= 0:
+                self.is_unfading = False
+                self.bridge.ui_fade_done()
 
         fingerprint = (state.mode, state.text)
         if fingerprint != self.last_text_fingerprint:
@@ -218,15 +243,17 @@ class GameLoop:
             if labels != self.choice_last_labels:
                 self.choice_last_labels = labels
                 self.choice_buttons = self._build_choice_buttons(labels)
+    def _game_over():
+        pass
 
     def _build_choice_buttons(self, labels):
         buttons = []
         if not labels:
             return buttons
-        max_width = self.screen_width - 200
-        btn_h = 44
+        max_width = self.screen_width - 50
+        btn_h = 45
         total_h = len(labels) * (btn_h + 10) - 10
-        start_y = self.dialog_box_rect.y - 20 - total_h
+        start_y = self.dialog_box_rect.y - 100 - total_h
         x = (self.screen_width - max_width) // 2
         for i, text in enumerate(labels):
             btn = Button(text, x, start_y + i * (btn_h + 10), max_width, btn_h, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, action=(lambda idx=i: self.bridge.ui_choose(idx)))
@@ -270,8 +297,14 @@ class GameLoop:
                 char_rect.right = self.screen_width - 20
                 self.screen.blit(self.current_char, char_rect)
 
-            self._draw_rounded_rect(self.screen, self.dialog_box_rect, (0, 0, 0, 180), radius=12, border=2, border_color=self.white)
+                if self.fade_alpha > 0:
+                    overlay = pygame.Surface((self.screen_width, self.screen_height))
+                    overlay.set_alpha(self.fade_alpha)
+                    overlay.fill((0, 0, 0))
+                    self.screen.blit(overlay, (0, 0))
 
+            self._draw_rounded_rect(self.screen, self.dialog_box_rect, (0, 0, 0, 180), radius=12, border=2, border_color=self.white)
+            
             state = self.bridge.get_state()
 
             if state.speaker:

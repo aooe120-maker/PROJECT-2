@@ -1,21 +1,24 @@
 # 씬 정보
 name = "오프닝"
 stage = 0 # 작동하는 스테이지
-req_like=(-100,'>') # (요구 호감도 , '=' : 같을때 '<' : 같거나 높을때 '>' : 같거나 낮을때)
+req_like=(-100,'<') # (요구 호감도 , '<' : 이상 '>' 미만)
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
+    game.img("sprites/blank.png") # 화면에 보일 캐릭터 이미지 변경 (아무것도 없는 이미지파일 : blank.png)
+    game.fade_out()
     game.background("sprites/bg/school.jpg")
+    game.fade_in()
 
     game.n("하교 시간은 늘 따분하다")
 
     game.n("새로 시작한 코딩 공부가 학교 공부보단 재밌을지도...")
 
     game.n("집가면 컴퓨터부터 켜야겠다")
-
+    
+    game.fade_out()
     game.background("sprites/bg/day.jpg")
-
-    game.img("sprites/blank.png") # 화면에 보일 캐릭터 이미지 변경 (아무것도 없는 이미지파일 : blank.png)
+    game.fade_in()
     game.n("화창한 날씨라 걷기 좋은 것 같다") # n = 나레이션 / 혼잣말
 
     game.img("sprites/thony/greet.png") # 화면에 보일 캐릭터 이미지 변경
@@ -56,21 +59,27 @@ def script(game):
     game.p("내가 파이썬을 진짜 좋아하거든")
 
     game.sel("입은 옷을 보니 그래보인다...","그래서 인사했구나")
-
+    if game.choice == 1: # 선택지 직후에 바로 choice를 부르지 않아도 2번 선택지를 골랐던것을 불러올 수 있습니다!
+        game.p("..? 그게 무슨말이야")
+        game.me("어.. 아니야")
+        game.n("이녀석 바보인가...")
+    
     game.p("친구하고 싶어서 말 걸었어!")
-
+    
     game.p("우리 친구하자")
 
     game.sel("좋아","음...")
 
-    game.p("오늘부터 친구인거다 알았지?")
+    game.p("좋다고? 오늘부터 친구인거다 알았지?")
 
     game.p("이만 가볼게!")
-    
+    game.fade_out()
     game.n("써니는 황급히 앞질러 달려갔다")
-
     if game.choice == 2: # 선택지 직후에 바로 choice를 부르지 않아도 2번 선택지를 골랐던것을 불러올 수 있습니다!
-        game.p("난 아직 말도 안했는데...")
-
+        game.me("난 아직 친구하겠단 말도 안했는데...")
+    game.img("sprites/blank.png")
+    game.fade_in()
+    game.me("좀 특이한 친구네...")
+    game.me("머리가 이상한가...")
     game.stage += 1
     game.end() # 게임오버가 아니라 씬의 종료를 알리는 함수입니다

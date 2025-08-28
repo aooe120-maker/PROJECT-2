@@ -42,6 +42,11 @@ class Game():
         self.choice = idx + 1
         return self.choice
 
+    def fade_in(self):
+        self.bridge.start_fade("in")
+    def fade_out(self):
+        self.bridge.start_fade("out")
+
     def end(self):
         self.bridge.mark_end()
 
@@ -49,7 +54,11 @@ class Game():
         self.pick_a_scene()
 
     def pick_a_scene(self):
-        scenes_filtered = [s for s in self.all_scenes if s.req_like[0] <= self.like]
+        scenes_filtered = []
+        for scene in self.all_scenes:
+            if scene.stage == scene.stage and scene.is_couple == self.is_couple:
+                if (scene.req_like[1] == "<" and scene.req_like[0] < self.like) or (scene.req_like[1] == ">" and scene.req_like[0] >= self.like):
+                    scenes_filtered.append(scene)
         self.current_scene = scenes_filtered[0]
         self.played_scenes.append(self.current_scene)
         self.current_scene.play()
