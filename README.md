@@ -3,7 +3,7 @@
   <b>2팀 - 도키도키 파이썬!</b>
 </p>
 
-
+#
 [게임 다운로드](localhost)
 소스코드로 실행할시 pip install pygame후 main으로 진입하시면 됩니다
 ## 프로젝트 개요
