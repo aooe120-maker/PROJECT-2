@@ -1,10 +1,9 @@
+
 <p align="center">
   <img src="sprites/logo.png" alt="로고" width="300"/><br>
   <b>2팀 - 도키도키 파이썬!</b>
 </p>
-
-
-[게임 다운로드](localhost)
+  
 ## 프로젝트 개요
 ### 팀원 소개
 - [이건우(팀장)](https://github.com/4vpr) : 게임개발 경력이 다수 있습니다. 개인 프로젝트만 진행 해왔으며, 파이썬 언어와 깃허브를 사용한 협업은 처음입니다.
@@ -18,3 +17,6 @@
 - 
 ## 게임 개요
 - 
+## 릴리즈
+- 소스코드로 실행할시 pip install pygame후 main으로 진입하시면 됩니다  
+- [게임 다운로드](localhost)  
