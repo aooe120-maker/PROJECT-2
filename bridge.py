@@ -9,6 +9,7 @@ class UIState:
     options: list[str] = field(default_factory=list)
     bg: str = ""
     img: str = ""
+    fade: bool = False
 
 class UIBridge:
     def __init__(self):
@@ -17,6 +18,7 @@ class UIBridge:
         self._next_ev = Event()
         self._choice_ev = Event()
         self._choice_idx = -1
+        self._fade_ev = Event()
 
     def show_text(self, speaker: str, text: str):
         with self._lock:
@@ -25,6 +27,13 @@ class UIBridge:
             self.state.text = text
         self._next_ev.clear()
         self._next_ev.wait()
+
+    def fade(self,status=True):
+        with self._lock:
+            self.state.fade = status
+        self._next_ev.clear()
+        self._next_ev.wait()
+        pass
 
     def ask_choice(self, options: list[str]) -> int:
         with self._lock:
@@ -56,3 +65,14 @@ class UIBridge:
     def get_state(self) -> UIState:
         with self._lock:
             return UIState(**self.state.__dict__)
+    
+    def start_fade(self, direction: str):
+        with self._lock:
+            self.state.fade = direction
+        self._fade_ev.clear()
+        self._fade_ev.wait()
+
+    def ui_fade_done(self):
+        with self._lock:
+            self.state.fade = ""
+        self._fade_ev.set()
