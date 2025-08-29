@@ -32,7 +32,10 @@ class Game():
         self.bridge.show_text("", f"[ {script} ]")
 
     def background(self, file):
-        self.bridge.set_bg(file)
+        if file[0:8] == "sprites/":
+            self.bridge.set_bg(file)
+        else:
+            self.bridge.set_bg("sprites/bg/" + file)
 
     def img(self, file):
         if file[0:8] == "sprites/":
