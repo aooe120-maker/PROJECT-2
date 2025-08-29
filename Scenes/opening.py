@@ -5,7 +5,7 @@ req_like=(-100,'>') # (요구 호감도 , '=' : 같을때 '<' : 같거나 높을
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
-    game.background("sprites/bg/school.jpg")
+    game.background("school.jpg")
 
     game.n("하교 시간은 늘 따분하다")
 
@@ -13,12 +13,12 @@ def script(game):
 
     game.n("집가면 컴퓨터부터 켜야겠다")
 
-    game.background("sprites/bg/day.jpg")
+    game.background("day.jpg")
 
-    game.img("sprites/blank.png") # 화면에 보일 캐릭터 이미지 변경 (아무것도 없는 이미지파일 : blank.png)
+    game.img("blank.png") # 화면에 보일 캐릭터 이미지 변경 (아무것도 없는 이미지파일 : blank.png)
     game.n("화창한 날씨라 걷기 좋은 것 같다") # n = 나레이션 / 혼잣말
 
-    game.img("sprites/thony/greet.png") # 화면에 보일 캐릭터 이미지 변경
+    game.img("thony/greet.png") # 화면에 보일 캐릭터 이미지 변경
     game.p("저기, 안녕!") # print()
 
     game.n("어디서 본거같은데...")
@@ -27,7 +27,7 @@ def script(game):
 
     game.me("어.. 안녕?") # 플레이어가 하게 될 대사
 
-    game.img("sprites/thony/idle1.png")
+    game.img("thony/idle1.png")
     game.p("너 혹시 파이썬 재밌어하니..?")
 
     game.sel("누구더라...","파이썬 정말 재밌지","좋아하진 않아") # 선택지
@@ -39,13 +39,13 @@ def script(game):
         game.p("역시 그럴 줄 알았어")
     elif game.choice == 3:
         game.like -= 3
-        game.img("sprites/thony/angry.png")
+        game.img("thony/angry.png")
         game.p("!!!!!!!!!!!")
         game.me("왜.. 왜그래...")
-        game.img("sprites/thony/blush.png")
+        game.img("thony/blush.png")
         game.p("미안.. 나도모르게...")
-    
-    game.img("sprites/thony/idle1.png")
+
+    game.img("thony/idle1.png")
 
     game.p("어.. 그게.. 나는 옆반의 써니라고해")
 
