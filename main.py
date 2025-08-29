@@ -1,5 +1,5 @@
 import pygame
-import sys
+import sys; import os
 import random
 from bridge import UIBridge
 from game import Game
@@ -61,7 +61,7 @@ class GameLoop:
         # 메뉴 버튼
         self.buttons = []
         self.create_main_menu_buttons()
-
+        
         # 브리지/게임
         self.bridge = UIBridge()
         self.game = Game(self.bridge)
@@ -87,14 +87,19 @@ class GameLoop:
         self.choice_buttons = []
         self.choice_last_labels = ()
 
-    def safe_load_image(self, path, alpha=False, scale_to=None):
+    def safe_load_image(self, img_path:str, alpha=False, scale_to=None):
         try:
-            img = pygame.image.load(path)
+            BASE_DIR = os.path.dirname(__file__)
+            safe_paths = img_path.split("/")
+            print(safe_paths)
+            full_safe_path = os.path.join(BASE_DIR, *safe_paths)
+            img = pygame.image.load(full_safe_path)
             img = img.convert_alpha() if alpha else img.convert()
             if scale_to:
                 img = pygame.transform.smoothscale(img, scale_to)
             return img
-        except Exception:
+        except Exception as e:
+            print(e)
             return None
 
     def create_main_menu_buttons(self):

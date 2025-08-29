@@ -1,5 +1,5 @@
 import threading
-import scene
+import scene; import os
 from bridge import UIBridge
 
 class Game():
@@ -35,7 +35,10 @@ class Game():
         self.bridge.set_bg(file)
 
     def img(self, file):
-        self.bridge.set_img(file)
+        if file[0:8] == "sprites/":
+            self.bridge.set_img(file)
+        else:
+            self.bridge.set_img("sprites/" + file)
 
     def sel(self, *choice):
         idx = self.bridge.ask_choice(list(choice))
