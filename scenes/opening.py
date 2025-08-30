@@ -2,7 +2,7 @@ import time
 # 씬 정보
 name = "오프닝"
 stage = 0 # 작동하는 스테이지
-req_like=(-100,'<') # (요구 호감도 , '<' : 이상 '>' 미만)
+req_like=(0,'>') # (요구 호감도 , '<' : 이상 '>' 미만)
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
@@ -11,9 +11,11 @@ def script(game):
     game.fade_out()
     game.n("대화창을 클릭하여 진행하여주세요")
     game.n("팀원마다 씬을 따로 만들어서 말투가 조금씩 다를 수 있습니다!")
-    game.n("팀원중 이 씬을 누가 만들었는지 유추하는것도 재밌을겁니다")
+    game.n("씬을 순서대로 만든것이 아니라 상황이 매끄럽지 않을 수 있습니다.")
+    game.n("대본쓰는데 2일밖에 없었어서 양해좀 ㅎㅎ;;;;;")
     game.n("도키도키 파이썬!")
     game.n("제작: 프로젝트 2팀")
+    game.n("...")
     game.n("내 이름은 김파이")
     game.n("나는 요즘 혼자 코딩을 공부한다")
     game.n("그냥 멋있어보여서 시작했는데 취미로는 괜찮다")
@@ -315,12 +317,12 @@ def script(game):
         game.mental -= 10
         game.fade_out()
         game.n("파이썬 공부를 열심히 하며 하루를 보냈다")
-        time.sleep(3)
+        time.sleep(1)
     if game.choice == 2:
         game.mental += 10
         game.fade_out()
         game.n("휴식도 필요한법. 공부도 했겠다 게임정도는 해도 되잖아?")
-        time.sleep(3)
+        time.sleep(1)
     game.n("다음 날")
     game.stage += 1
     game.end()

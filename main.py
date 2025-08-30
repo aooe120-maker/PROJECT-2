@@ -5,18 +5,48 @@ from bridge import UIBridge
 from game import Game
 import scene
 
+
+
+"""
+mian.py
+
+게임의 전체 흐름을 담당하는 main입니다.
+게임의 업데이트 로직 드로우 로직을 처리합니다.
+인터페이스로 게임 엔티티 클래스를 구축하기엔 하드코딩으로 커버 가능한 정도(버튼 몇개가 전부) + 시간부족 + 파이썬 인터페이스 문법을 잘 모름이슈
+
+
+전체적인 코드 흐름
+
+Scene에서 game의 func 호출 -> Game이 해당사항 bridge에 전달
+Bridge에서 서브스레드 동작 제어 , State 클래스 업데이트 -> main에서 get_state로 상태 업데이트 후 받아온 로직 처리
+
+# 코드 플로우
+Scene -> Game -> Bridge -> Main -> Bridge -> Scene
+
+##################################ISSUES##########################################
+all_buttons list로 드로우와 클릭입력을 처리하고 싶었지만 시간부족으로 하드코딩
+button에 대한 패턴이 동일한 코드들이 많아서 정리할 필요가 있음. 이것도 역시 시간부족
+##################################################################################
+
+"""
+
+
+
 class Status:
     MENU_MAIN = 0
     IN_GAME = 1
     MENU_DEBUG = 2
+
 
 class GameLoop:
     def __init__(self):
         pygame.init()
         self.screen_width = 1024 // 2
         self.screen_height = 1536 // 2
-        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
-        pygame.display.set_caption("도키도키 파이썬")
+
+        # Pygame
+        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height)) # 윈도우 생성
+        pygame.display.set_caption("도키도키 파이썬") # 윈도우 제목 설정
         self.clock = pygame.time.Clock()
         self.running = True
         self.status = Status.MENU_MAIN
@@ -101,13 +131,14 @@ class GameLoop:
         self.choice_buttons = []
         self.choice_last_labels = ()
 
+
+    # 안전하게 이미지 불러오기
     def safe_load_image(self, img_path:str, alpha=False, scale_to=None):
         try:
             BASE_DIR = os.path.dirname(__file__)
-            safe_paths = img_path.split("/")
-            print(safe_paths)
-            full_safe_path = os.path.join(BASE_DIR, *safe_paths)
-            img = pygame.image.load(full_safe_path)
+            safe_paths = img_path.split("/") # 이미지 경로를 / 로 나눔
+            full_safe_path = os.path.join(BASE_DIR, *safe_paths) # path join으로 안전하게 불러오기
+            img = pygame.image.load(full_safe_path) # 이미지 로드
             img = img.convert_alpha() if alpha else img.convert()
             if scale_to:
                 img = pygame.transform.smoothscale(img, scale_to)
@@ -116,28 +147,34 @@ class GameLoop:
             print(e)
             return None
 
+
+    # 메뉴버튼들 생성 !
     def create_main_menu_buttons(self):
         button_width = 280
         button_height = 70
-        button_x = (self.screen_width - button_width) // 2
-        button_y_start = self.screen_height // 2
+        button_x = (self.screen_width - button_width) // 2 # 버튼의 좌표를 화면 중앙에
+        button_y_start = self.screen_height // 2 # 버튼 시작을 중앙에서부터
+        button_gap = 90 # 버튼 간격
 
         self.buttons = [
             Button("게임 시작", button_x, button_y_start, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.start_game),
-            Button("불러오기", button_x, button_y_start + 90, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.load_game),
-            Button("나가기", button_x, button_y_start + 180, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.exit_game)
+            Button("불러오기", button_x, button_y_start + button_gap, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.load_game),
+            Button("나가기", button_x, button_y_start + button_gap * 2, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.exit_game)
         ]
 
+
+    # 게임 시작하는 함수
     def start_game(self):
         self.status = Status.IN_GAME
         self.game.play()
-
+    
+    # 불러오기 로직 (미구현)
     def load_game(self):
-        print("불러오기 버튼 클릭됨")
-
+        
+        pass
+    # 종료
     def exit_game(self):
         self.running = False
-
 
     # 실행 (메인함수)
     def run(self):
@@ -163,14 +200,22 @@ class GameLoop:
     # 이벤트 핸들러
     def handle_events(self):
         mouse_pos = pygame.mouse.get_pos() # 마우스 좌표받기
-        for event in pygame.event.get():
+        for event in pygame.event.get(): # 종료 입력 받기
+
+            
+            # 종료 입력 처리
             if event.type == pygame.QUIT:
                 self.running = False # 종료
+            
+            # 메뉴 버튼 입력 처리
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if self.status == Status.MENU_MAIN:
                     for b in self.buttons:
                         if b.is_hovered:
                             b.handle_click()
+                
+                
+                # 디버그 버튼 입력 처리
                 elif self.status == Status.MENU_DEBUG:
                     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                         for b in self.debug_buttons:
@@ -179,31 +224,44 @@ class GameLoop:
                     mouse_pos = pygame.mouse.get_pos()
                     for b in self.debug_buttons:
                         b.check_hover(mouse_pos)
+                
+                # 게임 내 입력 처리
                 elif self.status == Status.IN_GAME:
                     state = self.bridge.get_state()
+
+                    # 다이얼로그 박스 클릭
                     if state.mode == "text" and self.dialog_box_rect.collidepoint(mouse_pos):
                         if self.typing_len < len(self.typing_full):
                             self.typing_len = len(self.typing_full)
                         else:
                             self.bridge.ui_next()
+                    # 선택 버튼 클릭
                     elif state.mode == "choice":
                         for b in self.choice_buttons:
                             if b.is_hovered:
                                 b.handle_click()
                                 break
-                #키보드 입력 처리
+            #키보드 입력 처리
             if event.type == pygame.KEYDOWN:
+
+                #F2로 디버그 모드 진입
                 if event.key == pygame.K_F2:
                     self.status = Status.MENU_DEBUG
                     self.debug_buttons:Button = self._build_debug_scene_buttons()
+        
+        # 메뉴화면 버튼 마우스 호버링 체크
         if self.status == Status.MENU_MAIN:
             for b in self.buttons:
                 b.check_hover(mouse_pos)
+        
+        # 선택지 버튼 호버 체크
         elif self.status == Status.IN_GAME:
             state = self.bridge.get_state()
             if state.mode == "choice":
                 for b in self.choice_buttons:
                     b.check_hover(mouse_pos)
+        
+    """ 게임 업데이트 로직 """
     def update(self, dt: float):
         if self.status != Status.IN_GAME:
             return
@@ -228,6 +286,8 @@ class GameLoop:
                         w = int(img.get_width() * (h / img.get_height()))
                         self.current_char = pygame.transform.smoothscale(img, (w, h))
                         self.char_cache[self.current_img_path] = self.current_char
+        
+        
         if state.fade == "out" and not self.is_fading:
             self.is_fading = True
             self.is_unfading = False
@@ -264,7 +324,8 @@ class GameLoop:
                 self.choice_buttons = self._build_choice_buttons(labels)
     def _game_over():
         pass
-
+    
+    """ 버튼 생성 로직들 """
     def _build_choice_buttons(self, labels):
         buttons = []
         if not labels:
@@ -293,6 +354,18 @@ class GameLoop:
             buttons.append(b)
         return buttons
 
+
+    """
+    DRAW로직
+    DRAW로직
+    DRAW로직
+    DRAW로직          찾을때마다
+    DRAW로직                  안보이는
+    DRAW로직                          def draw(self):
+    DRAW로직
+    DRAW로직
+
+    """
     def draw(self):
         bg = self.current_bg if (self.status == Status.IN_GAME and self.current_bg) else self.menu_background
         if bg:
@@ -310,6 +383,7 @@ class GameLoop:
             for b in self.debug_buttons:
                 b.draw(self.screen)
         elif self.status == Status.IN_GAME:
+            state = self.bridge.get_state()
             if self.current_char:
                 char_rect = self.current_char.get_rect()
                 char_rect.bottom = self.screen_height
@@ -321,10 +395,8 @@ class GameLoop:
                     overlay.set_alpha(self.fade_alpha)
                     overlay.fill((0, 0, 0))
                     self.screen.blit(overlay, (0, 0))
-
-            self._draw_rounded_rect(self.screen, self.dialog_box_rect, (0, 0, 0, 180), radius=12, border=2, border_color=self.white)
-            
-            state = self.bridge.get_state()
+            if state.is_dialog_visiable:
+                self._draw_rounded_rect(self.screen, self.dialog_box_rect, (0, 0, 0, 180), radius=12, border=2, border_color=self.white)
 
             if state.speaker:
                 self._draw_rounded_rect(self.screen, self.name_plate_rect, (255, 255, 255, 230), radius=10, border=0)
@@ -341,6 +413,8 @@ class GameLoop:
                 pass
         pygame.display.flip()
 
+
+    """ 한글자씩 출력 구현 (도둑질한 코드) """
     def _draw_text_wrapped(self, surface, text, font, color, rect, line_spacing=4):
         if not text:
             return
@@ -396,6 +470,8 @@ class GameLoop:
         if line and y + font.get_linesize() <= rect.bottom:
             blit_line()
 
+
+    # 둥근 네모를 그려요~
     def _draw_rounded_rect(self, surface, rect, color_rgba, radius=8, border=0, border_color=(255, 255, 255)):
         s = pygame.Surface((rect.width, rect.height), pygame.SRCALPHA)
         pygame.draw.rect(s, color_rgba, pygame.Rect(0, 0, rect.width, rect.height), border_radius=radius)
@@ -403,6 +479,7 @@ class GameLoop:
         if border > 0:
             pygame.draw.rect(surface, border_color, rect, width=border, border_radius=radius)
 
+# 파티클 만들었는데 안씀 ㅋ
 class Particle:
     def __init__(self, x, y, image):
         self.x = x
@@ -422,6 +499,7 @@ class Particle:
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
 
+# 아아.. 이것은 버튼 클래스이다... 기본적인 임플란트지...
 class Button:
     def __init__(self, text, x, y, width, height, color, hover_color, border_color, shadow_color, action=None):
         self.rect = pygame.Rect(x, y, width, height)
@@ -437,7 +515,7 @@ class Button:
             self.font = pygame.font.Font("font/font.otf", 25)
         except FileNotFoundError:
             self.font = pygame.font.Font(None, 30)
-
+    # 버튼의 드로우 호출
     def draw(self, screen):
         pygame.draw.rect(screen, self.shadow_color, self.shadow_rect, border_radius=12)
         pygame.draw.rect(screen, self.border_color, self.rect, border_radius=12)
