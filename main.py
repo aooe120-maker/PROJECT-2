@@ -48,7 +48,21 @@ class GameLoop:
         # 리소스
         self.menu_background = self.safe_load_image('sprites/cover.jpg', scale_to=(self.screen_width, self.screen_height))
         self.logo_image = self.safe_load_image('sprites/logo.png', alpha=True)
-        self.logo_rect = self.logo_image.get_rect(center=(self.screen_width // 2, self.screen_height // 2 - 150)) if self.logo_image else None
+        if self.logo_image:
+            orig_w, orig_h = self.logo_image.get_size()
+            # 목표 가로 크기 (화면 가로 - 100)
+            target_w = self.screen_width - 100
+            # 비율 유지
+            scale_ratio = target_w / orig_w
+            target_h = int(orig_h * scale_ratio)
+            
+            # 스케일링
+            self.logo_image = pygame.transform.smoothscale(self.logo_image, (target_w, target_h))
+            
+            # 중앙 위치 지정
+            self.logo_rect = self.logo_image.get_rect(center=(self.screen_width // 2, self.screen_height // 2 - 150))
+        else:
+            self.logo_rect = None
 
         # IN_GAME용 동적 리소스
         self.bg_cache = {}

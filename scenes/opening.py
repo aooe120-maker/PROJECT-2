@@ -6,8 +6,14 @@ req_like=(-100,'<') # (요구 호감도 , '<' : 이상 '>' 미만)
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
+    all_correct:bool = True # 이런식으로 스크립트 내부에서만 사용할 변수 컨트롤 가능!
     game.img("blank.png") # 화면에 보일 캐릭터 이미지 변경 (아무것도 없는 이미지파일 : blank.png)
     game.fade_out()
+    game.n("대화창을 클릭하여 진행하여주세요")
+    game.n("팀원마다 씬을 따로 만들어서 말투가 조금씩 다를 수 있습니다!")
+    game.n("팀원중 이 씬을 누가 만들었는지 유추하는것도 재밌을겁니다")
+    game.n("도키도키 파이썬!")
+    game.n("제작: 프로젝트 2팀")
     game.n("내 이름은 김파이")
     game.n("나는 요즘 혼자 코딩을 공부한다")
     game.n("그냥 멋있어보여서 시작했는데 취미로는 괜찮다")
@@ -41,11 +47,11 @@ def script(game):
     game.img("thony/greet.png") # 화면에 보일 캐릭터 이미지 변경
     game.p("저기, 안녕!") # print()
     game.n("어디서 본거같은데...")
-    game.n("같은 수업을 듣는 학생이었나..?")
+    game.n("같은 학교 학생이었나..?")
     game.me("어.. 안녕?") # 플레이어가 하게 될 대사
     game.img("thony/idle1.png")
-    game.p("너 혹시 파이썬 재밌어하니..?")
-    game.sel("누구더라...","파이썬 정말 재밌지","아니 그닥...","파이썬 너무 좋아 사랑해") # 선택지
+    game.p("너 혹시 파이썬 좋아해..?")
+    game.sel("누구더라...","파이썬 정말 재밌지","아니 그닥...","파이썬 너무 좋아!") # 선택지
     if game.choice == 1: #받아온 선택지
         game.like -= 1 # 호감도 감도
     elif game.choice == 2:
@@ -101,7 +107,7 @@ def script(game):
     game.me("과제 다 못 끝냈는데...")
     game.me("붕어빵... 붕어빵...")
     game.me("됐다 잠이나 자자... 주말에 해야지 뭐...")
-    game.n("침대에 냅다 눕는다.")
+    game.n("침대에 눕자마자 잠에 들었다")
     game.fade_out()
     game.n("다음 날...")
     game.background("room1_day.png")
@@ -111,15 +117,108 @@ def script(game):
     game.me("어제 너무 늦게잤나...")
     game.n("띠링")
     game.n("핸드폰 알림이 울렸다")
-    game.n("썬..? 이게 누구지...")
-    game.n("썬 : 파이야 안녕!")
-    game.n("썬 : 우리 친구하기로 한거 맞지?")
-    game.n("썬 : 번호는 수소문 해서 알아냈어!")
+    game.img("phone.png")
+    game.n("써니...?")
+    game.n("써니 : 파이야 안녕!")
+    game.n("써니 : 우리 친구하기로 한거 맞지?")
+    game.n("써니 : 번호는 수소문 해서 알아냈어!")
     game.n("갑자기 이상한 친구가 생겼네...")
     game.n("대충 답해둘까....")
     game.n("파이 : 그렇구나 잘 부탁해")
-    game.n("썬 : 오늘 시간 돼?")
-    game.me("너무 갑작스럽잖아...")
-    game.me("")
+    game.n("써니 : 오늘 시간 돼?")
+    game.me("너무 갑작스러운데...")
+    game.n("써니 : 별거 아니야")
+    game.n("써니 : 간단한 파이썬 퀴즈를 낼건데 맞추면 돼!")
+    game.n("아직 파이썬 좀 어려운데...")
+    game.n("파이 : 그래 한번 맞춰볼게")
+    game.n("써니 : 다음 중 반복과 거리가 먼 걸 고르면 돼!")
+    game.sel("if","for","while")
+    if game.choice == 1:
+        game.like += 5
+        game.n("써니 : 너무 쉬웠지?")
+        game.n("파이 : 그랬을지도")
+        game.n("써니 : 그러면 이것도 맞춰봐!")
+        game.n("써니 : 다음 중 올바른 변수 선언을 고르면 돼!")
+        game.sel("6_number = 6","숫자 = 6","number == 6")
+        if game.choice == 1:
+            all_correct = False
+            game.n("써니 : 틀렸어! 변수명은 숫자로 시작 할 수 없다고!")
+            game.n("파이 : 배웠던거 같은데 까먹었었네...")
+        elif game.choice == 2:
+            game.like += 5
+            game.n("써니 : 오~ 파이썬이 유니코드 식별자 인식한다는걸 잘 알고 있네?")
+            game.n("써니 : 하지만 가급적 변수명은 영어로 선언하는게 좋아!")
+            game.sel("알고있어","나는 한글이 더 좋은데...")
+            if game.choice == 1:
+                game.n("써니 : 역시 파이구나")
+                game.sel("이정돈 껌이지")
+            if game.choice == 2:
+                game.n("써니 : 영어는 국제적 표준이라고!")
+        elif game.choice == 3:
+            all_correct = False
+            game.n("써니 : 틀렸어! 그건 비교연산자야!")
+    elif game.choice == 2 or game.choice == 3:
+        all_correct = False
+        game.like -= 5
+        game.n("써니 : 반복과 거리가 먼 것은 if야!")
+        game.n("써니 : 너 아직 기초도 모르는구나!")
+        game.n("파이 : 그게 시작한지 얼마 안 돼서...")
+    if not all_correct:
+        game.n("써니 : 준비한 문제가 좀 더 있는데 지금은 못 풀겠다")
+        game.n("파이 : 이거 미안하네")
+    game.n("써니 : 용건은 여기까지야!")
+    game.n("정말 파이썬을 좋아하는구나...")
+    game.n("써니 : 그럼 월요일에 학교에서 보자")
+    game.n("써니 : 어려운 문제들 준비할거니깐 파이썬 공부 해둬!")
+    game.n("파이 : 나 아직 과제도 다 못 끝냈는걸")
+    game.n("써니 : 아무튼!")
+    game.n("그냥 이참에 파이썬 좀 더 해볼까...")
+    if all_correct:
+        game.n("써니 : 그때는 지금처럼 검색해서 답변 못 할껄?")
+        game.sel("검색 안 했거든","들켰네...")
+        if game.choice == 1:
+            game.n("써니 : 그럼 더 더 어려운 문제를 준비 해 두지..")
+        elif game.choice == 2:
+            game.n("써니 : 으이구")
+            game.n("써니 : 파이썬 공부 더 해야돼 알겠지?")
+    game.n("파이 : 알겠어")
+    game.img("blank.png")
+    game.me("일단 밀린 과제부터 끝낼까...")
+    game.fade_out()
+    game.n("10시간 뒤...")
+    game.background("room1.jpg")
+    game.fade_in()
+    game.me("와 드디어 끝났다...")
+    game.me("과제가 뭐 이리 어려운거야...")
+    game.me("파이썬 공부까지 하기엔 시간이 늦었네...")
+    game.me("내일 해야겠다")
+    game.fade_out()
+    game.n("다음날")
+    time.sleep(2)
+    game.fade_in()
+    game.me("흐아아암...")
+    game.me("오늘은 파이썬 공부 좀 해볼까?")
+    game.sel("문제 풀기(과제 문제 복습)","영상 자료 시청(스킵)")
+    def answer(answer):
+        if game.choice == answer:
+            game.n("정답!")
+        else:
+            game.n("오답..")
+        game.n("다음 문제")
+    if game.choice == 1:
+        game.n("다음 중 14 % 3의 계산 결과로 옳은 것은?")
+        game.sel("4","4.6","2","1")
+        answer(3)
+        game.n("거듭제곱을 올바르게 표현한 식을 골라주세요")
+        game.sel("2 ^^ 3","2 ** 3","2 ^* 3","2 ~~ 3")
+        answer(2)
+        game.n("올바른 print 문의 사용 예는?")
+        game.sel('print "Hello"',"print Hello ",'print("Hello")',"print['Hello']")
+        answer(3)
+
+    
+    elif game.choice == 2:
+        game.fade_out()
+        game.n("파이썬 학습 영상들을 시청한다")
     game.stage += 1
     game.end()
