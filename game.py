@@ -12,6 +12,7 @@ class Game():
         self.like = 0 # 호감도
         self.interest = 0 # 흥미도
         self.belive = 0 # 신뢰도
+        self.mental = 100 # 멘탈 수치
 
         self.stage = 0 # 현재 스테이지
         self.is_couple = False # 커플인지

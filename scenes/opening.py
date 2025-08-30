@@ -198,15 +198,20 @@ def script(game):
     game.fade_in()
     game.me("흐아아암...")
     game.me("오늘은 파이썬 공부 좀 해볼까?")
-    game.sel("문제 풀기(과제 문제 복습)","영상 자료 시청(스킵)")
+    game.sel("파이썬 시험 풀기(14기 과제 문제 복습!)","영상 자료 시청(스킵)")
+    answers = 0
+    corrects = 0
     def answer(answer):
         if game.choice == answer:
             game.n("정답!")
+            corrects += 1
         else:
             game.n("오답..")
+            game.me("이런....")
+        answers += 1
         game.n("다음 문제")
     if game.choice == 1:
-        game.n("다음 중 14 % 3의 계산 결과로 옳은 것은?")
+        game.n("다음 중 14 % 3의 계산 결과로 옳은 것을 골라주세요")
         game.sel("4","4.6","2","1")
         answer(3)
         game.n("거듭제곱을 올바르게 표현한 식을 골라주세요")
@@ -215,10 +220,107 @@ def script(game):
         game.n("올바른 print 문의 사용 예는?")
         game.sel('print "Hello"',"print Hello ",'print("Hello")',"print['Hello']")
         answer(3)
-
-    
+        game.n("변수를 생성하는 방법으로 올바른 것을 골라주세요")
+        game.sel("number == 20","100 == number","number(7)","number = 7")
+        answer(4)
+        game.n("다음 중 변수 이름으로 사용 할 수 있는것을 골라주세요")
+        game.n("78abc","_aBc","for","abc%2")
+        answer(2)
+        game.n("다음 중 int로 선언 된 것을 골라주세요")
+        game.sel("a = 7.0","a = 7810","a = float(10)")
+        answer(2)
+        game.n("type(3.0 + 7.0)의 결과로 올바른 것을 골라주세요")
+        game.sel("<class 'float>","10","10.0","<class int>")
+        answer(1)
+        game.n("비교 연산자의 결과로 올바르지 않은 것을 골라주세요")
+        game.sel("8 == 2 * 4 (True)","4 != 2 + 2(False)","2 * 3 is 3 + 3(True)","8 is 4 * 2.0(True)")
+        answer(2)
+        game.n("안녕 and True의 결과로 올바른 것을 골라주세요")
+        game.n("False","안녕","True","None")
+        answer(3)
+        game.n("x는 5와 같지 않다 라는 뜻과 동일한 것을 골라주세요")
+        game.sel("x <= 5","x != 5","x & 5","x ! 5")
+        answer(2)
+        game.n("논리 연산의 결과를 뒤집는 연산자를 골라주세요")
+        game.sel("is not","not","!=","end","and","or")
+        answer(2)
+        game.n(f"맞춘 문제: {corrects}개")
+        game.n(f"틀린 문제: {answers - corrects}개")
+        game.n(f"전체 문제: {answers}개")
+        game.n("써니한테 문제 푼거 공유할까...")
+        game.sel("공유한다")
+        game.img("phone.png")
+        score = int(corrects / answers * 100)
+        if game.choice == 1:
+            game.n(f"파이 : 파이썬 온라인 시험 쳐서 {score}점 받았어")
+            if score >= 85:
+                game.like += corrects
+                game.n("써니 : 오 잘했는데?")
+                game.n("써니 : 공부해달라고 진짜 할줄은 몰랐어")
+                game.sel("그래도 소중한 친구의 부탁인데 들어줘야지","심심해서 했어")
+                if game.choice == 1:
+                    game.like += 5
+                    game.n("써니 : 진짜? 감동이다")
+                if game.choice == 2:
+                    game.n("써니 : 그래도 감동인걸")
+            elif score >= 65:
+                game.like += 3
+                game.n("써니 : 열심히 했구나!")
+                game.n("써니 : 조금은 분발 해야겠어!")
+                game.n("파이 : 열심히 푼거라고!")
+                game.n("써니 : ㅋㅋㅋㅋ 미안")
+            else:
+                game.like += 1
+                game.n("써니 : 노력은 했구나...")
+                game.n("파이 : 응...")
+                game.n("써니 : 내일 문제 난이도 좀 낮춰줄까..?")
+                game.sel("아니","응")
+                if game.choice == 2:
+                    game.n("써니 : 그런건 없다! 이미 문제는 다 만들어놨어")
+                    game.n("파이 : 그럼 왜 물어본거야 ㅋㅋ")
     elif game.choice == 2:
         game.fade_out()
         game.n("파이썬 학습 영상들을 시청한다")
+        game.fade_in()
+        game.me("후우 공부가 많이 됐다")
+        game.n("띠링")
+        game.n("핸드폰 알림이 울렸다")
+        game.img("phone.png")
+        game.n("써니네... 무슨 용건이지?")
+        game.n("써니 : 안녕")
+        game.n("파이 : 안녕")
+        game.n("써니 : 파이썬 공부는 했니..?")
+        game.sel("물론이지","많이는 못 했어")
+        game.n("써니 : 그래? 내일 내가 내는 문제 풀 자신 있어?")
+        game.sel("자신있어!","음....")
+        if game.choice == 1:
+            game.like += 5
+            game.n("써니 : 자신있다니...")
+        elif game.choice == 2:
+            game.n("써니 : 뭐가 그 반응은!")
+            game.n("파이 : 노력은 해볼게")
+    game.n("써니 : 바로 옆반이지?")
+    game.n("파이 : 그럴껄?")
+    game.n("써니 : 내일 쉬는시간에 찾아간다!")
+    game.n("파이 : 긴장해야겠는걸")
+    game.n("써니 : 그럼 내일 학교에서 보자!")
+    game.n("파이 : 그래 내일 봐")
+    game.n("이 녀석에게 거리감이란 뭘까...")
+    game.n("괜히 말려드는거 같은 기분...")
+    game.n("그래도 싫지만은 않다")
+    game.n("써니랑 조금은 친해 진 것 같다...")
+    game.n("남은 시간동안 뭘 할까")
+    game.sel("당연히 파이썬 공부","어제 못한 게임")
+    if game.choice == 1:
+        game.mental -= 10
+        game.fade_out()
+        game.n("파이썬 공부를 열심히 하며 하루를 보냈다")
+        time.sleep(3)
+    if game.choice == 1:
+        game.mental -= 10
+        game.fade_out()
+        game.n("휴식도 필요한법. 공부도 했겠다 게임정도는 해도 되잖아?")
+        time.sleep(3)
+    game.n("다음 날")
     game.stage += 1
     game.end()
