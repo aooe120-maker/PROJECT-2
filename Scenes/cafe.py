@@ -94,8 +94,17 @@ def script(game):
     game.me("응.. 괜찮아")
     game.img("thony/smile.png")
     game.p("이해해줘서 고마워.")
-    game.p()
+    game.p("그럼 우리 그만 갈까?")
+    game.n("조용히 고개를 끄덕였다.")
 
+    game.background("street.jpg")
+    game.n("카페를 나서는데 써니가 뒤를 돈다.")
+    game.p("오늘 정말 즐거웠어 파이썬도 배우고 너랑도 같이 있고")
+    game.n("써니가 조용히 내손을 잡았다.")
+    game.n("따뜻한 손이 내 손을 감싼다.")
+    game.img("thony/hands.png")
+    game.n("말걸지마..정신이 하나도 없으니까")
+    game.me("응.. 나도 좋았어")
 
 
     game.stage += 1
