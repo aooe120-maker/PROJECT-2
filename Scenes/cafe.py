@@ -86,6 +86,8 @@ def script(game):
         game.like -= 10
         game.img("thony/stay.png")
         game.p("너 생각보다 파이썬에 관심이 없구나? 조금 실망이야")
+    
+    game.background("cafe_night.jpg")
     game.n("잠깐의 침묵이 흘렀다...")
     game.n("내가 뭘 잘못했나?")
     game.n("갑자기 써니가 노트북을 덮는다.")
@@ -94,18 +96,43 @@ def script(game):
     game.me("응.. 괜찮아")
     game.img("thony/smile.png")
     game.p("이해해줘서 고마워.")
-    game.p("그럼 우리 그만 갈까?")
+    game.p("그럼, 우리 그만 갈까?")
     game.n("조용히 고개를 끄덕였다.")
 
-    game.background("street.jpg")
-    game.n("카페를 나서는데 써니가 뒤를 돈다.")
-    game.p("오늘 정말 즐거웠어 파이썬도 배우고 너랑도 같이 있고")
-    game.n("써니가 조용히 내손을 잡았다.")
-    game.n("따뜻한 손이 내 손을 감싼다.")
+    game.background("street_night.jpg")
+    game.n("카페를 나서는데 써니가 갑자기 뒤를 돈다.")
+    game.p("오늘 정말 즐거웠어 파이썬도 배우고 너랑도 같이 있고...")
+    game.n("!?!?!?!?!?!?!?!?")
     game.img("thony/hands.png")
-    game.n("말걸지마..정신이 하나도 없으니까")
+    game.n("!?!?!?!?!?!?!?!?")
+    game.n("써니가 조용히 내손을 잡았다.")
+    game.n("작고 따뜻한 손이 내 손을 부드럽게 감싼다.")
     game.me("응.. 나도 좋았어")
+    game.n("놀란 가슴을 진정시키려 애썼다.")
+    game.p("그럼, 우리 다음에 또 만나자.")
+    game.n("조용히 고개를 끄덕였다.")
+    game.img("blank.png")
 
+    game.n("써니가 떠난자리엔..")
+    game.n("따뜻한 손의 온기가 한동안 내 손에 남아있었다.")
+    game.n("그러다 문득 하늘을 바라봤을때.")
+    game.background("moonlight2.jpg")
+    game.n("내마음을 대변하듯 밝은 달이 밤하늘을 다삼킬듯 떠 있었다.")
+    game.n("그 순간, 모든 것이 멈춘 듯한 기분이 들었다.")
+    game.me("아무래도 오늘 잠드는건 무리일지도..")
 
+    game.n("써니의 시점")
+    game.background("night.jpg")
+    game.img("thony/Think2.png")
+    game.n("파이와 함께한 시간들이 떠올랐다.")
+    game.p("왠지 앞으로 파이와 함께할 시간들이 기대된다.")
+    game.p("아무래도 오늘 잠자긴 글른거 같네")
+
+    game.img("blank.png")
+    game.n("...........")
+    game.background("moonlight3.jpg")
+    game.n("달이 어느새 두사람을 바라보며 환하게 웃었다.")
+
+    
     game.stage += 1
     game.end() # 게임오버가 아니라 씬의 종료를 알리는 함수입니다
