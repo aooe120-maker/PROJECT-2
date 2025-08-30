@@ -316,8 +316,8 @@ def script(game):
         game.fade_out()
         game.n("파이썬 공부를 열심히 하며 하루를 보냈다")
         time.sleep(3)
-    if game.choice == 1:
-        game.mental -= 10
+    if game.choice == 2:
+        game.mental += 10
         game.fade_out()
         game.n("휴식도 필요한법. 공부도 했겠다 게임정도는 해도 되잖아?")
         time.sleep(3)
