@@ -5,8 +5,10 @@ is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
     game.background("cafe.jpg")
+    game.img("blank.png")
     game.n("카페에 오면 항상..") 
     game.n("생각도 잠시 재촉하는 써니의 말소리가 들린다.")
+    game.img("thony/greet.png")
     game.p("파이! 빨리 좀 와 설마 카페에 처음 와보는건 아니겠지?")
     game.n("닥달하면 뭐 빨라지는것도 아닌데...잔소리...")
     game.me("아니야 처음은 아닌데...")
@@ -16,7 +18,8 @@ def script(game):
     game.sel("카페는 쓸데없이 비싸잖아","사람들이 너무 많은걸 안좋아해..","너가 너무 다그치니까 당황스러워서..")
     if game.choice == 1: #받아온 선택지
         game.like -= 10 #호감도 감소
-        game.p("뭐야 너도 돈이 없구나")
+        game.img("thony/sigh.png")
+        game.p("뭐야 너 돈없구나?")
         game.me("아니 그런게 아니라...")
     elif game.choice == 2:
         game.like += 10 #호감도 증가
@@ -28,12 +31,13 @@ def script(game):
         game.me("응.. 조금 혼나는것 같았어")
     game.p("그래도 여기 분위기 좋지 않아?")
     game.me("장소의 가치도 중요하지만 누구랑 함께하냐가 중요하지")
+    game.img("thony/Brightly.png")
     game.p("그럼 나랑 자주 오자!")
     game.n("환하게 웃는 써니의 모습에 나도 모르게 미소가 지어진다.")
     game.me("응.. 좋아")
     game.n("따뜻한 햇살이 비추는 카페에서의 시간이 흘러간다.")
     game.p("이렇게 자유로운게 얼마만이야 매일 학교만다니고")
-    game.n("어차피 집가도 파이썬만 죽어라 팔거면서..뭐가 다르지?")
+    game.n("어차피 집가도 파이썬만 죽어라 할거면서..뭐가 다르지?")
     game.me("그냥.. 가끔은 이렇게 여유롭게 생각할 시간도 필요한 것 같아")
     game.p("그런가.. 나도 가끔은 여유를 가져야겠다.")
     game.p("아참, 파이썬 공부 같이할래?")
@@ -45,17 +49,25 @@ def script(game):
     elif game.choice == 2:
         game.like -= 30
         game.me("아.. 그래..")
+        game.img("thony/stay.png")
         game.p("싫어? 너는 파이썬이싫어!? 별로야!")
     elif game.choice == 3:
         game.like +=10
+        game.img("thony/blush2.png")
         game.p("음..파이썬도 좋지만 너랑 노는것도 좋아!")
     game.me("근데 파이썬은 언제부터 좋아한거야?")
+    game.img("thony/think.png")
+    game.n("...........")
+    game.img("thony/greet.png")
     game.p("어렸을때부터 컴퓨터를 좋아했는데 파이썬이 제일 쉬워서 시작했어")
     game.n("나는 시작한지 얼마 안됬는데 자랑하고싶나..?")
+    game.img("thony/angry.png")
     game.p("또, 혼자 멍때리면서 무슨생각해? 속으로 내욕했지!?")
     game.n("뭐지 얜..?섬뜩한 기분이 든다")
+    game.img("thony/smile.png")
     game.p("아하핫 농담이야 쫄기는!")
     game.p("자... 게임을 시작하지..")
+    game.img("thony/work.png")
     game.n("써니는 노트북을 꺼내더니 파이썬 코딩을 시작한다.")
     game.p("그럼 시작할게!?")
     game.n("이게 맞는건진 모르겠지만 나는 반사적으로 고개를 끄덕였다.")
@@ -64,16 +76,27 @@ def script(game):
     game.sel("컴프리헨션은 이터러블 객체의 원소가 항목 변수에 바인딩된다.","표현식if항목for이터러블in조건문.","if...else는 담을 값을 선택하지않는다")
     if game.choice == 1:
         game.like += 30
+        game.img("thony/shy.png")
         game.p("오! 너 좀 친다?")
     elif game.choice == 2:
         game.like -= 20
+        game.img("thony/grumpy.png")
         game.p("뒤.질.래.?")
     elif game.choice == 3:
         game.like -= 10
+        game.img("thony/stay.png")
         game.p("너 생각보다 파이썬에 관심이 없구나? 조금 실망이야")
     game.n("잠깐의 침묵이 흘렀다...")
     game.n("내가 뭘 잘못했나?")
-    
+    game.n("갑자기 써니가 노트북을 덮는다.")
+    game.img("thony/blush2.png")
+    game.p("미안.. 파이썬을 주제로 대화할 상대가 있다는게 너무 좋아서 그만...")
+    game.me("응.. 괜찮아")
+    game.img("thony/smile.png")
+    game.p("이해해줘서 고마워.")
+    game.p()
+
+
 
     game.stage += 1
     game.end() # 게임오버가 아니라 씬의 종료를 알리는 함수입니다
