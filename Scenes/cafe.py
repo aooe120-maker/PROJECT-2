@@ -133,6 +133,6 @@ def script(game):
     game.background("moonlight3.jpg")
     game.n("달이 어느새 두사람을 바라보며 환하게 웃었다.")
 
-    
+
     game.stage += 1
     game.end() # 게임오버가 아니라 씬의 종료를 알리는 함수입니다
