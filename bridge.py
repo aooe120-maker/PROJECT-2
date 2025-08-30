@@ -9,13 +9,13 @@ State 클래스를 통해 상태를 공유하며 통신합니다
 이벤트를 통해 scene의 서브스레드를 제어합니다
 
 """
-
+# //
 @dataclass
 class UIState:
     mode: str = "idle" # "idle" , "text" , "choice" , "end"
     speaker: str = "" # 화자의 이름
     text: str = "" # 화자의 출력 텍스트
-    options: list[str] = [] # 선택지들 str 리스트
+    options: list[str] = field(default_factory=list) # 선택지들 str 리스트
     bg: str = "" # background 파일
     img: str = "" # img 파일
     fade: str = ""
