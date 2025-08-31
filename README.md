@@ -47,7 +47,7 @@
 ### 릴리즈
 > 소스코드로 실행할시 pip install pygame후 main으로 진입하시면 됩니다  
 > ~(팀장)매일 새벽 3시까지 갈아넣으며 만들었습니다...~  
-> [게임 다운로드](localhost)
+> [게임 다운로드]((https://github.com/aooe120-maker/PROJECT-2/releases/tag/0.1))
 
 ## 추가) 소스코드에서 직접 씬을 추가해보자!
 ### 씬 새로 만들기
