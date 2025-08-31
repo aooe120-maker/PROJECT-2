@@ -48,14 +48,9 @@
 > [게임 다운로드](localhost)
 
 ## 추가) 소스코드에서 직접 씬을 추가해보자!
-레포주소 : https://github.com/aooe120-maker/PROJECT-2/tree/main
-
 ### 씬 새로 만들기
 - scenes 폴더 안에 template.py (혹은 testscene.py) 파일을 복사하고 이름을 적절하게 지어주세요 예) 카페데이트라면: cafe.py
 - 씬 정보를 알맞게 수정해주시고 script를 지운 후 새로 작성해주세요!
-- 작성이 완료되었다면 상위폴더에 scene.py를 열어주세요.
-- import scenes.cafe as cafe 의 예처럼 import란 밑에 적어주세요!
-- 아래 laod_scenes 함수에 불러온 모듈을 씬으로 추가해주세요.
 
 ### 테스트 하는법
 - vsc에서 main.py를 열어주세요.
