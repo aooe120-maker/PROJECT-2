@@ -13,7 +13,7 @@ hiddenimports = [
     'scenes.cafe',
     'scenes.disneyland',
     'scenes.theater',
-    'scenes.park',
+    'scenes.end',
 ]
 
 # Data assets to bundle (directories are copied recursively)

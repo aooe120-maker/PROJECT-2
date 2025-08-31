@@ -18,7 +18,7 @@ mian.py
 전체적인 코드 흐름
 
 Scene에서 game의 func 호출 -> Game이 해당사항 bridge에 전달
-Bridge에서 서브스레드 동작 제어 , State 클래스 업데이트 -> main에서 get_state로 상태 업데이트 후 받아온 로직 처리
+Bridge에서 서브스레드 동작 제어 , State 클래스 업데이트 -> main에서 get_state로 상태 업데이트 후 받아온 상태 클래스로 상태 업데이트
 
 # 코드 플로우
 Scene -> Game -> Bridge -> Main -> Bridge -> Scene
@@ -269,7 +269,9 @@ class GameLoop:
     def update(self, dt: float):
         if self.status != Status.IN_GAME:
             return
-        state = self.bridge.get_state()
+        state = self.bridge.get_state() # 브릿지에서 상태 클래스 가져오기
+
+        # 배경 변경
         if state.bg != self.current_bg_path:
             self.current_bg_path = state.bg
             if self.current_bg_path:
@@ -279,6 +281,8 @@ class GameLoop:
                     if img:
                         self.current_bg = pygame.transform.smoothscale(img, (self.screen_width, self.screen_height))
                         self.bg_cache[self.current_bg_path] = self.current_bg
+
+        #캐릭터 이미지 변경
         if state.img != self.current_img_path:
             self.current_img_path = state.img
             if self.current_img_path:
@@ -291,7 +295,7 @@ class GameLoop:
                         self.current_char = pygame.transform.smoothscale(img, (w, h))
                         self.char_cache[self.current_img_path] = self.current_char
         
-        
+        # fade 구현부
         if state.fade == "out" and not self.is_fading:
             self.is_fading = True
             self.is_unfading = False
@@ -371,6 +375,7 @@ class GameLoop:
 
     """
     def draw(self):
+        #배경 그리기
         bg = self.current_bg if (self.status == Status.IN_GAME and self.current_bg) else self.menu_background
         if bg:
             self.screen.blit(bg, (0, 0))

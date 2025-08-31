@@ -9,7 +9,8 @@ env/
 
 
 .vscode/
-
+dist/
+build/
 
 .pytest_cache/
 .coverage
