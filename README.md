@@ -18,8 +18,7 @@
 </br>
 
 # 스크린샷
-![1](screenshot/1.png)
-![2](screenshot/2.png)
+<img src="screenshot/1.png" width="600"><img src="screenshot/2.png" width="600">
 
 
 
