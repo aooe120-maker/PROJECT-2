@@ -154,7 +154,7 @@ def script(game):
         game.p("그.. 그건 잊어줘!!")
         game.me("그럴까나 말까나~")
         game.p("야!!!!!")
-    game.img("thony/idle1")
+    game.img("thony/idle1.png")
     game.p("그럼 조심히 들어가!")
     game.me("너도 조심히 들어가~")
     game.fade_out()

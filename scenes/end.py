@@ -6,6 +6,227 @@ req_like=(-100,'>')
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
+    
+    def couple_scene():
+        game.me("역시 이쪽에서 먼저...")
+        game.me("하아... 이거 쉽지 않네...")
+        game.me("공부나 하면서 천천히 생각해야겠다...")
+        game.fade_out()
+        game.n("10 시간 뒤...")
+        game.n("공부가 하나도 손에 안 잡히잖아...")
+        game.me("안되겠다 그냥 저질러 버리자!")
+        game.background("room1.jpg")
+        game.fade_in()
+        game.n("나는 당장 써니에게 전화를 걸었다.")
+        game.n("제발 받아라 제발...")
+        game.n("아니다 무섭다 받지 말아줘...")
+        game.p("...")
+        game.p("여보세요?")
+        game.me("써니야... 그 파이인데..")
+        game.p("응?")
+        game.me("지금 잠깐 시간 괜찮아?")
+        game.p("왠일이래?")
+        game.me("그냥 밤산책하고싶은데... 심심해서..")
+        game.p("좋아! 나도 잠깐 리프레시 하고 싶었어")
+        game.me("30분 뒤에 공원으로 나와")
+        game.p("알겠어~")
+        game.n("뚝-")
+        game.me("휴우.......")
+        game.me("심장 멎는줄 알았네...")
+        game.me("나갈 준비 해 볼까...")
+        game.fade_out()
+        time.sleep(1)
+        game.n("나갈 준비를 마친 후 집을 나섰다.")
+        game.fade_in()
+        game.background("night.jpg")
+        game.p("파이!")
+        game.img("thony/Brightly.png")
+        game.n("!!!!!!!!!!!")
+        game.n("깜짝 놀랐다...")
+        game.img("thony/smile.png")
+        game.p("? 뭘 그렇게 놀라")
+        game.me("아니야...")
+        game.me("뭐야 ㅋㅋㅋ")
+        game.img("thony/idle1.png")
+        game.p("시원한게 날씨 좋지 않아?")
+        game.me("그러게 날씨 좋네")
+        game.p("저기 공원까지 걸어볼까?")
+        game.me("ㅈ..좋아")
+        game.fade_out()
+        game.n("나는 긴장한체로 사담을 이어가며 공원으로 왔다")
+        game.background("park.jpg")
+        game.p("저기 잠깐 앉아있을까?")
+        game.me("그러자")
+        game.fade_in()
+        game.me("그게 사실은...")
+        game.p("?")
+        game.me("너한테 할 말이 있어..")
+        game.p("응???")
+        game.img("thony/blush.png")
+        game.n("써니는 내가 무슨 말을 할 지 알고있는 듯한 표정이었다.")
+        game.me("음... 그게...")
+        game.me("나...")
+        game.sel("써니 너가 좋은것 같아")
+        game.img("thony/blush4.png")
+        game.p("..!!!!!!!!")
+        game.me("사귈래..?")
+        game.p("으아아아...")
+        game.p("난 준비 안됐었는데...")
+        game.n("타이밍이 안 좋았나...")
+        game.p("......(좋아)")
+        game.me("..? 뭐라고??")
+        game.img("thony/blush_angry.png")
+        game.p("으아아악!! 좋다고!!")
+        game.me("!!")
+        game.me("...")
+        game.img("thony/blush4.png")
+        game.p("우으으으...")
+        game.me("하하...")
+        game.p("할말은 그게 다지..?")
+        game.me("그럼 뭐가 더 있겠어...")
+        game.n("사귀게 되어 기쁜 감정과 후련한 감정이 뒤섞였다")
+        game.p("도... 돌아갈까?")
+        game.me("...좋아")
+        game.fade_out()
+        game.n("나는 써니의 손을 살포시 붙잡았다")
+        game.img("Hands.png")
+        game.background("night.jpg")
+        game.fade_in()
+        game.p(",,,")
+        game.me(",,,")
+        game.n("어색한 침묵에 서로의 심장 박동만이 들려왔다")
+        game.n("[ 엔딩 1 ] 도키도키 파이&써니!")
+
+    def friend_scene():
+        game.n("몇 주 뒤...")
+        game.n("나는 그녀와 둘도 없는 친구가 되었다")
+        game.n("조금의 로멘스는 중간중간 있었을지도..?")
+        game.background("school.png")
+        game.img("thony/greet.png")
+        game.fade_in()
+        game.p("여 잠은 잘 잤는가~~~~")
+        game.me("으어 피곤해 죽겠어...")
+        game.p("파이썬 공부하느라 피곤한거 맞지?")
+        game.me("...")
+        game.img("thony/grumpy.png")
+        game.p("!!")
+        game.me("오늘은 진짜 할게")
+        game.p("너 그러고 안할거잖아!!")
+        game.me("이번엔 진짜로 할게")
+        game.img("thony/disap.png")
+        game.p("...")
+        game.me("알았어 알았어 오늘도 파이썬 문제는 있지?")
+        game.p("이따 쉬는시간에 찾아간다...")
+        game.me("그럼 무슨 문제를 내든 맞춰주마")
+        game.p("틀리면 벌칙으로 밥사")
+        game.sel("...그래","싫은데~")
+        if game.choice == 2:
+            game.p("밥 사.")
+            game.me("... 알겠어;; 맞추면 되잖아")
+        game.img("thony/Brightly.png")
+        game.p("꽁짜밥이다~")
+        game.me("뭐?!?!")
+        game.me("진짜 다 맞춰주마")
+        game.n("...")
+        if game.like >= 60:
+            game.n("암만생각해도 써니는 나한테 호감 있었던거 같은데..")
+            game.n("놀이공원에서 그래두고 어떻게 저리 자연스러울수 있나 신기했다")
+            game.n("복잡하게 생각말자...")
+        game.n("지금 이런 관계도 좋은 것 같다.")
+        game.n("지금의 거리감이 좋은 것 같다")
+        game.n("써니도 지금이 제일 맘에 들지도 모르겠다")
+        game.n("그래도 이런 알싸한 관계도 나쁘지 않은 것 같다")
+        game.fade_out()
+        time.sleep(1)
+        game.n("[ 엔딩 2 ] 최고의 친구?")
+        game.gameover()
+
+    def happy_scene():
+        game.n("써니랑 많은 시간을 보낸 것 같다")
+        game.n("나는 아마도 써니를 좋아하는 것 같다...")
+        game.n("써니도 나를...")
+        game.n("어쩌면 내가 먼저 고백을...")
+        game.fade_in()
+        game.n("마침 그 때 써니에게서 전화가 왔다")
+        game.img("phone.png")
+        game.me("괜히 긴장되네...")
+        game.img("blank.png")
+        game.p("여보세요...? 파이!")
+        game.n("어딘가 써니의 목소리에서 떨림이 느껴진다")
+        game.me("써니 무슨일이야?")
+        game.p("그.. 잠깐 시간 돼?")
+        game.me("오늘 일정 없는데 왜?")
+        game.p("우리집에서...")
+        game.me("응?")
+        game.p("우리집에서.. 파이썬 공부하지 않을래?")
+        game.p("선생님의 밀착 강의...")
+        game.n("심장이 마구 요동치기 시작했다")
+        game.n("정신차리자..")
+        game.me("그.. 그래!")
+        game.n("나는 애써 진정해보려 노력한다")
+        game.p("그럼 우리집 앞으로 와")
+        game.me("써니 집이 어디었지..?")
+        game.p("앗 알려준 적 없었나..?")
+        game.p("~~ 로 오면 돼!")
+        game.me("알겠어 이따 보자")
+        game.fade_out()
+        game.me("여자 집은 처음 가보는데...")
+        game.n("나는 서둘러 준비를 하고 나섰다.")
+        game.n("이런 저런 생각을 하며 걷다보니 어느새 써니의 집 앞이었다.")
+        game.n("후... 긴장되네...")
+        game.n("띵동 - ")
+        game.p("파이 왔구나!!")
+        game.p("문 열어줄게!")
+        game.me("실례합니다...")
+        game.n("써니의 얼굴을 보니 겨우 진정시킨 심장이 요동치기 시작했다")
+        game.n("후...")
+        game.p("이쪽이 내 방이야!")
+        game.background("room2.jpg")
+        game.img("home/idle.png")
+        game.fade_in()
+        game.p("..어서와!")
+        game.me("방이 이쁘네")
+        game.p("헤헤,,, 그렇지?")
+        game.me("그래서 파이썬 공부는..?")
+        game.p("그게...")
+        game.p("사실은...")
+        game.n("묘한 긴장감이 돈다...")
+        game.p("그냥 할 얘기가 있어서 불렀어!")
+        game.me("무.. 무슨얘기..?")
+        game.p("나 있지...")
+        game.img("home/shy.png")
+        game.n("꿀꺽...")
+        game.p("파이가 좋은거 같아")
+        game.me("파이썬이..?")
+        game.p("아니.. 파이 너가...")
+        game.me("..!")
+        game.p("대답을 얼굴 보고 듣고싶었어...")
+        game.sel("좋아..!")
+        game.p("... 정말?")
+        game.p("...")
+        game.p("파이야..")
+        game.p("혹시 안아도 될까?")
+        game.p("조용히 안아준다","...응")
+        game.img("home/hug.png")
+        game.p("!!!!!")
+        game.n("써니의 심장박동이 느껴진다")
+        game.n("앞으론 파이썬 공부 열심히 할 것 같다...")
+        game.p("좋아해..")
+        game.me("...")
+        game.fade_out()
+        game.n("10년 뒤..?")
+        time.sleep(1)
+        game.img("home/wedding.png")
+        game.background("wedding.jpg")
+        game.fade_in()
+        game.p("나 어떤거 같아?")
+        game.me("잘 어울려..")
+        game.n("그놈의 파이썬 목걸이는 참 독한 것 같다")
+        game.n("[ 트루 엔딩 ] 오순도순 행복하게 잘 살았답니다")
+        time.sleep(2)
+        game.fade_out()
+        game.gameover()
+    
     game.img("blank.png") # 화면에 보일 캐릭터 이미지 변경 (아무것도 없는 이미지파일 : blank.png)
     game.fade_out()
     game.background("room_morning.jpg")
@@ -19,55 +240,54 @@ def script(game):
         game.fade_in()
         game.p("파이야 나야!")
         game.n("현관문 뒤로 외치는 써니의 목소리가 희미하게 들린다")
-        game.n("무슨일이래..")
+        game.n("쿵! 쿵! 쿵!")
+        game.n("쿵  !  쿵  !  쿵  !")
+        game.n("무슨일이지..")
         game.n("그것보다 우리집은 어떻게 알아낸거지..?")
         game.n("알려 준 적 있었나...")
         game.me("써니 맞지..? 조금만 기다려!")
         game.p("빨리 나와야해!")
         game.me("뭐가 저렇게 급한거람...")
+        game.n("써니가 와준건 기쁘지만...")
+        game.n("어딘가 이상해 보이네...")
         game.fade_out()
         game.background("apt.jpg")
-        game.img("thony/Brightly.png")
+        game.img("date/blush.png")
         game.n("나는 대충 준비를 마치고 문을 열었다")
         game.fade_in()
         game.p("파이!!")
         game.me("써니구나.. 무슨일이래?")
         game.p("보고싶어서 찾아왔지")
-        game.n("적극적인건 알았는데 이정도였나..?")
-        game.n("살짝 당혹스럽다")
         game.p("있지 나 파이가 너무 좋은거같아!")
         game.p("파이가 너무너무 좋은거같아")
         game.p("... 아니 사랑하는거같아...")
-        game.n("나도 어느정도 호감이 있기에 기쁜 말이지만")
-        game.n("어딘가 섬뜩하게 들리는 것 같다")
+        game.n("나도 호감이 있기에 기쁜 말이지만")
+        game.n("어딘가 섬뜩하게 들린다")
         game.p("파이는 나 어떻게 생각해?")
         game.sel("음...","잘 모르겠어...","갑자기 왜 그래")
-        game.img("thony/stay.png")
+        game.background("black.jpg")
         game.p("응?")
-        game.sel("나도 써니가 좋아!", "나도 써니가 좋아!!","나도 써니가 좋아!!!")
-        game.img("thony/Brightly.png")
+        game.sel("나도 써니가 좋아!", "나도 써니가 좋아!!","나도 써니가 좋아!!!","나도 써니가 좋아!!!","나도 써니가 좋아!!!")
+        game.background("apt.jpg")
         game.p("그치? 헤헤헤")
         game.p("그래서 그런데...")
         game.p("우리 영원히 함께하지 않을래?")
         game.sel("그게 무슨...")
-        game.img("thony/stay.png")
+        game.background("black.jpg")
         game.p("응? 뭐라고?")
-        game.sel("영원히 함께하자!","영원히 함께하자!!","영원히 함께하자!!!")
-        game.img("thony/Brightly.png")
+        game.sel("영원히 함께하자!","영원히 함께하자!!","영원히 함께하자!!!","영원히 함께하자!!!","영원히 함께하자!!!","영원히 함께하자!!!")
         game.p("헤헤 파이야 너도 내가 좋구나!")
         game.n("써니의 미소가 섬뜩하게 보인다")
         game.n("뭔가 잘못 되어가는것 같다...")
         game.p("오늘 같이 산책 하지 않을래?")
-        game.sel("(도망친다)","(받아들인다)")
-        if game.choice == 1:
+        game.n("...")
+        if game.mental < 100:
+            game.sel("(도망친다)")
             game.fade_out()
             game.img("blank.png")
             game.n("나는 있는 힘껏 도망치기 시작했다")
-            game.background("runaway.png")
-            game.fade_in()
             game.p("파이!!")
             game.p("거기 서!!")
-            game.fade_out()
             game.n("나는 앞만 보고 달리기 시작했다")
             game.n("얼마나 달렸을까")
             game.n("뒤를 돌아봐도 쫓아오는 사람은 없었다")
@@ -76,8 +296,9 @@ def script(game):
             game.fade_in()
             game.n("하아... 하아...")
             game.n("이제 어쩌지...")
+            game.n("...")
             game.fade_out()
-            game.n("밖에서 시간을 좀 보낸 뒤 집으로 귀가한다")
+            game.n("나는 밖에서 시간을 좀 보낸 뒤 집으로 귀가했다")
             game.n("집 앞에서 기다릴까 걱정과는 달리")
             game.n("현관문 앞엔 아무도 없었다")
             game.me("학교에선 어쩌지...")
@@ -85,13 +306,15 @@ def script(game):
             game.n("... 며칠 뒤")
             game.n("써니는 며칠동안 학교에서 보이지 않았다")
             game.n("최근엔 전학을 간다는 얘기를 들었다")
-            game.n("나는 안도의 한숨을 들이킨다")
+            game.n("나는 안도의 한숨을 내쉰다")
+            game.n("뭐였을까...")
             time.sleep(1)
-            game.n("[ 엔딩 4 ] 이상해진 그녀")
+            game.n("[ 히든엔딩 1 ] 이상해진 그녀")
             game.gameover()
-    
-        elif game.choice == 2:
-            game.img("thony/Brightly.png")
+        if game.mental >= 100:
+            game.sel("(그녀를 받아들인다)")
+            game.background("apt.jpg")
+            game.img("date/blush.png")
             game.me("좋아 산책하자!")
             game.p("헤헤헤.....")
             game.fade_out()
@@ -117,11 +340,14 @@ def script(game):
             game.p("눈 감아봐")
             game.fade_out()
             game.n("그녀는 내게 입맞춤을 해왔다")
-            game.n("당혹스러움보단 이상한 안도감과 안정감이 든다...")
-            game.n("[ 엔딩 3 ] 해피엔딩...?")
+            game.n("당혹스러움,설렘보단 이상한 안도감과 안정감이 든다...")
+            game.n("기묘한 느낌이 든다")
+            game.fade_in()
+            game.img("date/kiss.png")
+            game.n("[ 히든엔딩 2 ] 해피엔딩...?")
             game.gameover()
 
-    elif game.like >= 90:
+    elif game.like >= 85:
         happy_scene()
 
     elif game.like >= 60:
@@ -132,7 +358,7 @@ def script(game):
 
         # 연인엔딩
         if game.choice == 1:
-            park_scene()
+            couple_scene()
 
         # 친구엔딩
         if game.choice == 2:
@@ -145,135 +371,21 @@ def script(game):
         game.n("더 다가가곤 싶지만...")
         friend_scene()
 
-    # 싸움 엔딩
+    # 멀어짐 엔딩
     else:
-        game.n("써니랑은 다툰 이후로 연락을 하지 않았다")
-        game.n("어디서부터 잘못된건지 모르겠다")
+        game.n("무슨일 이었던걸까...")
+        game.n("써니가 갑자기 왜 그랬는지 모르겠다")
+        game.n("다음날 학교")
+        game.background("school2.jpg")
+        game.fade_in()
+        game.n("윗층에서 써니가 내려오는게 보인다")
+        game.img("thony/stay.png")
+        game.me("안녕..?")
+        game.n("써니는 나를 애써 무시하고 지나친다")
+        game.img("blank.png")
+        game.me("...")
         game.n("그냥 잠깐의 설렘이었던 것 같다")
+        game.n("어디서부터 잘못된거였을까...")
+        game.n("파이썬 공부를 더 열심히 할껄그랬나...")
         game.n("[ 엔딩 5 ] 멀어진 그녀")
         game.gameover()
-
-    def friend_scene():
-        game.n("몇 주 뒤...")
-        game.n("나는 그녀와 둘도 없는 친구가 되었다")
-        game.n("조금의 로멘스는 중간중간 있었을지도..?")
-        game.n("그래도 이런 알싸한 관계도 괜찮은거 같다")
-        game.background("school.png")
-        game.img("thony/greet.png")
-        game.fade_in()
-        game.p("여 잠은 잘 잤는가~~~~")
-        game.me("으어 피곤해 죽겠어...")
-        game.p("파이썬 공부하느라 피곤한거 맞지?")
-        game.me("...")
-        game.img("thony/grumpy.png")
-        game.p("!!")
-        game.me("오늘은 진짜 할게")
-        game.p("너 그러고 안할거잖아!!")
-        game.me("이번엔 진짜로 할게")
-        game.img("thony/disap.png")
-        game.p("...")
-        game.me("알았어 알았어 오늘도 파이썬 문제는 있지?")
-        game.p("이따 쉬는시간에 찾아간다...")
-        game.me("그럼 무슨 문제를 내든 맞춰주마")
-        game.p("틀리면 벌칙으로 밥사")
-        game.sel("...그래","싫은데~")
-        if game.choice == 2:
-            game.img("밥 사.")
-            game.me("... 알겠어;; 맞추면 되잖아")
-        game.img("thony/Brightly.png")
-        game.p("꽁짜밥이다~")
-        game.me("뭐?!?!")
-        game.me("진짜 다 맞춰주마")
-        game.n("...")
-        if game.like >= 60:
-            game.n("암만생각해도 써니는 나한테 호감 있는거 같은데..")
-            game.n("복잡하게 생각말자...")
-        game.n("지금 이런 관계도 좋은 것 같다.")
-        game.n("지금의 거리감이 좋은 것 같다")
-        game.n("써니도 지금이 제일 맘에 들지도 모르겠다")
-        game.fade_out()
-        time.sleep(1)
-        game.n("[ 엔딩 2 ] 최고의 친구?")
-        game.gameover()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    def park_scene():
-        game.p("")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    def happy_scene():
-        game.n("써니랑 많은 시간을 보낸 것 같다")
-        game.n("나는 아마도 써니를 좋아하는 것 같다...")
-        game.n("어쩌면 내가 먼저 고백을...")
-        game.fade_in()
-        game.n("써니에게서 전화가 왔다")
-        game.me("괜히 긴장되네...")
-        game.p("여보세요...? 파이!")
-        game.n("어딘가 써니의 목소리에서 떨림이 느껴진다")
-        game.me("써니 무슨일이야?")
-        game.p("")
-
-        pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    game.gameover()

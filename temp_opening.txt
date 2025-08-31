@@ -1,4 +1,4 @@
-import time
+﻿import time
 # 씬 정보
 name = "오프닝"
 stage = 0 # 작동하는 스테이지
@@ -11,8 +11,8 @@ def script(game):
     game.fade_out()
     game.n("대화창을 클릭하여 진행하여주세요")
     game.n("팀원마다 씬을 따로 만들어서 말투가 조금씩 다를 수 있습니다!")
-    game.n("씬을 순서대로 만든것이 아니라 극의 흐름이 어색 할 수 있습니다.")
-    game.n("대본쓰는데 3일밖에 없었어서 양해좀 ㅎㅎ;")
+    game.n("씬을 순서대로 만든것이 아니라 상황이 매끄럽지 않을 수 있습니다.")
+    game.n("대본쓰는데 2일밖에 없었어서 양해좀 ㅎㅎ;;;;;")
     game.n("도키도키 파이썬!")
     game.n("제작: 프로젝트 2팀")
     game.n("씬 작성자 : 이건우")
@@ -197,7 +197,6 @@ def script(game):
     game.me("내일 해야겠다")
     game.fade_out()
     game.n("다음날")
-    game.background("room1_day.png")
     time.sleep(2)
     game.fade_in()
     game.me("흐아아암...")

@@ -35,9 +35,9 @@ def script(game):
     game.me("어제 밤새서 했지. 문제 내볼래?")
     game.img("thony/greet.png")
     game.p("오호라~ 자신 있나보네. 좋아 !")
-    game.img("thony/idle.png")
+    game.img("thony/idle1.png")
     game.p("첫번째 문제! 틀리면 왕딱밤 간다?")
-    game.img("thony/idle.png")
+    game.img("thony/idle1.png")
     game.p("정수를 입력받아 4를 입력했을때 결과가 True인 함수는?")
     game.sel("is_even = lambda a: a%2 == 0; is_even(4)",
              "is_even = lambda a: a%2; is_even(4)",
@@ -69,7 +69,7 @@ def script(game):
     game.p("칼로리 계산을 부탁해!")
     game.p("cal = '200', exercise = 300 \n print(exercise>cal)")
     game.sel("1. True. 종아리 튼실해보이고 좋은데 왜?", "2. False. 지금 팔뚝 건강해보이고 좋은데 왜?","3. Error. 네가 뺄 살이 어디있어? 너 쓰러져")        
-    if game. choice == 3:
+    if game.choice == 3:
         game.img("thony/idle1.png")
         game.p("..그런소리를 늘 듣긴해")
         game.n("파이의 얼굴이 붉어졌다!")

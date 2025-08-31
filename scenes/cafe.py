@@ -25,7 +25,7 @@ def script(game):
     game.p("대답을 좀 해봐")
     game.sel("카페는 쓸데없이 비싸잖아","사람들이 너무 많은걸 안좋아해..","너가 너무 다그치니까 당황스러워서..")
     if game.choice == 1: #받아온 선택지
-        game.like -= 10 #호감도 감소
+        game.like -= 5 #호감도 감소
         game.img("thony/sigh.png")
         game.p("뭐야 너 돈없구나?")
         game.me("아니 그런게 아니라...")
@@ -52,15 +52,15 @@ def script(game):
     
     game.sel("정말? 기다렸다구!","아..그래..","난 너랑 노는게 더 좋은데..")
     if game.choice == 1:
-        game.like += 20
+        game.like += 10
         game.p("응, 나도 너랑 같이 공부하면 더 열심히 할 수 있을 것 같아")
     elif game.choice == 2:
-        game.like -= 30
+        game.like -= 5
         game.me("아.. 그래..")
         game.img("thony/stay.png")
         game.p("싫어? 너는 파이썬이싫어!? 별로야!")
     elif game.choice == 3:
-        game.like +=10
+        game.like += 5
         game.img("thony/blush2.png")
         game.p("음..파이썬도 좋지만 너랑 노는것도 좋아!")
     game.me("근데 파이썬은 언제부터 좋아한거야?")
@@ -83,11 +83,11 @@ def script(game):
     game.n("다음중 옳은 표현을 구해보세요!")
     game.sel("컴프리헨션은 이터러블 객체의 원소가 항목 변수에 바인딩된다.","표현식if항목for이터러블in조건문.","if...else는 담을 값을 선택하지않는다")
     if game.choice == 1:
-        game.like += 30
+        game.like += 10
         game.img("thony/shy.png")
         game.p("오! 너 좀 친다?")
     elif game.choice == 2:
-        game.like -= 20
+        game.like -= 5
         game.img("thony/grumpy.png")
         game.p("뒤.질.래.?")
     elif game.choice == 3:
@@ -111,7 +111,7 @@ def script(game):
     game.n("카페를 나서는데 써니가 갑자기 뒤를 돈다.")
     game.p("오늘 정말 즐거웠어 파이썬도 배우고 너랑도 같이 있고...")
     game.n("!?!?!?!?!?!?!?!?")
-    game.img("thony/hands.png")
+    game.img("thony/Hands.png")
     game.n("!?!?!?!?!?!?!?!?")
     game.n("써니가 조용히 내손을 잡았다.")
     game.n("작고 따뜻한 손이 내 손을 부드럽게 감싼다.")

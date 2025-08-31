@@ -1,7 +1,7 @@
 import threading
 import scene; import os
 from bridge import UIBridge
-
+import time
 """
 game.py
 
@@ -70,6 +70,7 @@ class Game():
 
     def gameover(self):
         self.fade_out()
+        time.sleep(2)
         self.n("플레이 해 주셔서 감사합니다")
         self.n("제작 : 프로젝트 2 팀")
         self.bridge.mark_end()
