@@ -112,7 +112,7 @@ def script(game):
     game.n("이미 본 작품이지만 막상 다시보니 설레는것 같았다")
     game.background("kal.png")
     game.n("영화가 상영되기 시작한다")
-    game.backgorund("kal2.png")
+    game.background("kal2.png")
     game.n("...")
     game.p("저기..")
     game.me("왜? 나 집중 중인데")
