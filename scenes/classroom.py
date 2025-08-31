@@ -103,7 +103,7 @@ def script(game):
         game.img("thony/Brightly.png")
         game.p("앗싸~")
         game.n("웃는게 조금 귀여워 보였다")
-    if game.choice == 2:
+    elif game.choice == 2:
         game.img("thony/angry.png")
         game.p("뭐야 그 석연치 않은 반응은!")
         game.me("아아앗 알겠어 볼게 볼게")
@@ -116,4 +116,5 @@ def script(game):
     game.p("그럼 가볼게~")
     game.fade_out()
     game.me("뭔가 문제 엄청 낼거같았는데 그런건 아니었네..")
+    game.stage += 1
     game.end()

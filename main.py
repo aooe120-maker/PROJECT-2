@@ -66,6 +66,9 @@ class GameLoop:
         self.shadow_color = (50, 50, 50, 50)
         self.name_plate_color = (255, 255, 255)
 
+        # 디버그씬에서 쓸 호감도
+        self.debug_like = 120
+
         # 폰트
         try:
             self.button_font = pygame.font.Font("font/font.otf", 20)
@@ -189,6 +192,8 @@ class GameLoop:
     def _start_debug_scene(self, scene_obj):
         self.status = Status.IN_GAME
         self.bridge.state.mode = "idle"
+        self.game.like = self.debug_like
+        self.game.stage = scene_obj.stage
         self.game.current_scene = scene_obj
         self.game.played_scenes.append(scene_obj)
 
