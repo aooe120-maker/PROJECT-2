@@ -41,6 +41,13 @@ class Status:
 class GameLoop:
     def __init__(self):
         pygame.init()
+        # 원파일에서 파일 불러오기
+        # _MEIPASS는 앱 실행시 유저폴더에 만들어지는 임시폴더.
+        try:
+            if hasattr(sys, "_MEIPASS"):
+                os.chdir(sys._MEIPASS)
+        except Exception:
+            pass
         self.screen_width = 1024 // 2
         self.screen_height = 1536 // 2
 
@@ -67,7 +74,8 @@ class GameLoop:
         self.name_plate_color = (255, 255, 255)
 
         # 디버그씬에서 쓸 호감도
-        self.debug_like = 120
+        self.debug_like = 0
+        self.debug_mental = 120
 
         # 폰트
         try:
@@ -193,6 +201,7 @@ class GameLoop:
         self.status = Status.IN_GAME
         self.bridge.state.mode = "idle"
         self.game.like = self.debug_like
+        self.game.mental = self.debug_mental
         self.game.stage = scene_obj.stage
         self.game.current_scene = scene_obj
         self.game.played_scenes.append(scene_obj)
@@ -270,7 +279,10 @@ class GameLoop:
         if self.status != Status.IN_GAME:
             return
         state = self.bridge.get_state() # 브릿지에서 상태 클래스 가져오기
-
+        if state.mode == "end":
+            self.status = Status.MENU_MAIN
+            self.bridge = UIBridge()
+            self.game = Game(self.bridge)
         # 배경 변경
         if state.bg != self.current_bg_path:
             self.current_bg_path = state.bg

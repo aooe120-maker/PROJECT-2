@@ -25,7 +25,7 @@ def script(game):
         game.me("써니야... 그 파이인데..")
         game.p("응?")
         game.me("지금 잠깐 시간 괜찮아?")
-        game.p("왠일이래?")
+        game.p("웬일이래?")
         game.me("그냥 밤산책하고싶은데... 심심해서..")
         game.p("좋아! 나도 잠깐 리프레시 하고 싶었어")
         game.me("30분 뒤에 공원으로 나와")
@@ -89,19 +89,21 @@ def script(game):
         game.me("...좋아")
         game.fade_out()
         game.n("나는 써니의 손을 살포시 붙잡았다")
-        game.img("Hands.png")
+        game.img("thony/Hands.png")
         game.background("night.jpg")
         game.fade_in()
         game.p(",,,")
         game.me(",,,")
         game.n("어색한 침묵에 서로의 심장 박동만이 들려왔다")
         game.n("[ 엔딩 1 ] 도키도키 파이&써니!")
+        game.fade_out()
+        game.gameover()
 
     def friend_scene():
         game.n("몇 주 뒤...")
         game.n("나는 그녀와 둘도 없는 친구가 되었다")
         game.n("조금의 로멘스는 중간중간 있었을지도..?")
-        game.background("school.png")
+        game.background("school.jpg")
         game.img("thony/greet.png")
         game.fade_in()
         game.p("여 잠은 잘 잤는가~~~~")
@@ -223,7 +225,7 @@ def script(game):
         game.me("잘 어울려..")
         game.n("그놈의 파이썬 목걸이는 참 독한 것 같다")
         game.n("[ 트루 엔딩 ] 오순도순 행복하게 잘 살았답니다")
-        time.sleep(2)
+        time.sleep(1)
         game.fade_out()
         game.gameover()
     
@@ -281,7 +283,7 @@ def script(game):
         game.n("뭔가 잘못 되어가는것 같다...")
         game.p("오늘 같이 산책 하지 않을래?")
         game.n("...")
-        if game.mental < 100:
+        if game.mental >= 100:
             game.sel("(도망친다)")
             game.fade_out()
             game.img("blank.png")
@@ -311,7 +313,7 @@ def script(game):
             time.sleep(1)
             game.n("[ 히든엔딩 1 ] 이상해진 그녀")
             game.gameover()
-        if game.mental >= 100:
+        if game.mental < 100:
             game.sel("(그녀를 받아들인다)")
             game.background("apt.jpg")
             game.img("date/blush.png")
@@ -341,9 +343,9 @@ def script(game):
             game.fade_out()
             game.n("그녀는 내게 입맞춤을 해왔다")
             game.n("당혹스러움,설렘보단 이상한 안도감과 안정감이 든다...")
+            game.img("date/kiss.png")
             game.n("기묘한 느낌이 든다")
             game.fade_in()
-            game.img("date/kiss.png")
             game.n("[ 히든엔딩 2 ] 해피엔딩...?")
             game.gameover()
 

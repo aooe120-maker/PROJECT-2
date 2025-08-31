@@ -70,9 +70,10 @@ class Game():
 
     def gameover(self):
         self.fade_out()
-        time.sleep(2)
+        time.sleep(1)
         self.n("플레이 해 주셔서 감사합니다")
         self.n("제작 : 프로젝트 2 팀")
+        self.n("클릭하여 메인메뉴로 이동")
         self.bridge.mark_end()
 
     def _run_scene(self): # main에서 game 불러오는 함수
