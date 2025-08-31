@@ -17,6 +17,12 @@
 </br>
 </br>
 
+#플레이 스크린샷
+![1](screenshot/1.png)
+![2](screenshot/2.png)
+
+
+
 # 프로젝트 개요
 ### 팀원 소개
 #### [이건우(팀장)](https://github.com/4vpr)
