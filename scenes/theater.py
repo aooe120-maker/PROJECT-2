@@ -64,7 +64,7 @@ def script(game):
     game.background("oo.png")
     game.other("자 거두절미 하고 바로 문제 쏩니다!", "CGV직원")
     game.other("1번. 아래코드를 실행했을 때 출력 결과는?","CGV직원")
-    game.other("a=10 \n if a % 2 == 0 and a > 5: \n print('조건 충족') \n else: \n print('조건 불충족')","CGV직원")
+    game.other("a=10 ; if a % 2 == 0 and a > 5: ; print('조건 충족') ; else: print('조건 불충족')","CGV직원")
     game.sel("조건 불충족", "조건 충족","에러발생")
     if game.choice == 2:
         game.other("오 저기 모델 같으신분! 정답입니다~","CGV직원")
@@ -86,7 +86,7 @@ def script(game):
     game.background("oo.png")
     game.other("자. 그럼 두번째 문제 쏩니다!","CGV직원")
     game.other("다음 코드에서 출력되는 결과는?","CGV직원")
-    game.other("nums = [1, 2, 3, 4, 5] \n print(nums[1:4])")
+    game.other("nums = [1, 2, 3, 4, 5] ; print(nums[1:4])","CGV직원")
     game.sel("[2, 3, 4]","[1, 2, 3]", "[2, 3, 4, 5]")
     if game.choice == 1:
         game.other("wow 정답~ 정말 대단해요! ","CGV직원")
