@@ -7,6 +7,7 @@ is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
     game.fade_out()
+    game.n("씬 작성자 : 강현정")
     game.n("월요일의 학교...")
     game.n("늦게 잔 탓인지 조금은 피곤한거 같다...")
     game.n("1교시 쉬는시간이 시작하자마자 반의 뒷문이 벌컥 열린다")
@@ -114,6 +115,4 @@ def script(game):
     game.p("그럼 가볼게~")
     game.fade_out()
     game.me("뭔가 문제 엄청 낼거같았는데 그런건 아니었네..")
-    game.n("학교를 끝마치고 집으로 왔다")
-    game.stage += 1
     game.end()

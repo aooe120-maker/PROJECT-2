@@ -153,16 +153,14 @@ class GameLoop:
     def create_main_menu_buttons(self):
         button_width = 280
         button_height = 70
-        button_x = (self.screen_width - button_width) // 2 # 버튼의 좌표를 화면 중앙에
-        button_y_start = self.screen_height // 2 # 버튼 시작을 중앙에서부터
+        button_x = (self.screen_width - button_width) // 2 # 버튼 시작을 가로축 중앙으로 정렬
+        button_y_start = self.screen_height // 2 + 90 # 버튼 시작을 세로 축 중앙 + 90
         button_gap = 90 # 버튼 간격
 
         self.buttons = [
             Button("게임 시작", button_x, button_y_start, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.start_game),
-            Button("불러오기", button_x, button_y_start + button_gap, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.load_game),
-            Button("나가기", button_x, button_y_start + button_gap * 2, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.exit_game)
+            Button("나가기", button_x, button_y_start + button_gap, button_width, button_height, self.button_color, self.button_hover_color, self.button_border_color, self.shadow_color, self.exit_game)
         ]
-
 
     # 게임 시작하는 함수
     def start_game(self):

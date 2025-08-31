@@ -1,11 +1,15 @@
-name = "disneyland"
+import time
+
+name = "디즈니랜드"
 stage = 4 # 작동하는 스테이지
 req_like=(200000,'<') # (요구 호감도 , '=' : 같을때 '<' : 같거나 높을때 '>' : 같거나 낮을때)
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
-    game.background("room_morning.jpg")
     game.img("blank.png")
+    game.fade_out()
+    game.background("room_morning.jpg")
+    game.n("그로부터 몇 주 뒤...")
     game.n("휴대폰의 알람이 득달같이 울린다.")
     game.n("반쯤은 떠지지않은 눈을 비비며 발신자를 확인했다")
     game.n("써니..?")
@@ -17,9 +21,12 @@ def script(game):
     game.p("아니, 오늘 학교쉬는날인데 무슨 소리람!")
     game.p("빨리 준비해! 오늘 우리 데이트야!")
     game.me("예에!?!?")
+    game.fade_in()
+    game.n("눈이 번쩍 떠졌다")
     game.p("디즈니랜드 갈거야! 준비빨리해!")
     game.n("전화가 뚝 끊겼지만 움직일 수 없었다.")
     game.n("데이트란 단어가 머리속에서 떠나지 않았다.")
+    game.n("데이트... 데이트...")
     
     game.n("얼른 준비하고 집을 나섰다.")
 
@@ -70,7 +77,10 @@ def script(game):
     game.p("파이! 빨리 와!")
     game.me("응. 금방갈게!!")
     game.img("blank.png")
-    
+    game.fade_out()
+    time.sleep(1)
+    game.background("themepark.jpg")
+    game.fade_in()
     game.n("............")
     game.n("롤러코스터는 생각보다 훨씬 더 무서웠다.")
     game.n("기뻐보이는 써니와는 다르게 내심장은 쿵쾅거렸다.")

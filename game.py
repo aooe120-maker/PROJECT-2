@@ -66,8 +66,13 @@ class Game():
         self.bridge.start_fade("out")
 
     def end(self): # scene에서 종료를 호출하는 함수
-        self.bridge.mark_end()
         self.next_scene()
+    def game_over(self):
+        self.fade_out()
+        self.n("-끝-")
+        self.n("플레이 해 주셔서 감사합니다")
+        self.n("제작 : 프로젝트 2 팀")
+        self.bridge.mark_end()
 
     def _run_scene(self): # main에서 game 불러오는 함수
         self.next_scene()

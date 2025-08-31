@@ -1,13 +1,21 @@
-name = "cafe"
+name = "카페"
 stage = 3 # 작동하는 스테이지
 req_like=(200000,'<') # (요구 호감도 , '=' : 같을때 '<' : 같거나 높을때 '>' : 같거나 낮을때)
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
+    game.fade_out()
+    game.n("씬 작성자 : 최재흥")
     game.background("cafe.jpg")
     game.img("blank.png")
+    game.n("몇 주 뒤")
+    game.n("써니와는 쉬는시간마다 찾아오고는 대화를 나누거나 하굣길을 같이 걷거나 하며 시간을 보냈다")
+    game.n("물론 파이썬 공부도 계속 해왔다")
+    game.n("누구 덕분에 의욕이 나는 것 같기도")
+    game.n("오늘은 써니를 카페에서 만나기로 했다.")
     game.n("카페에 오면 항상..") 
     game.n("생각도 잠시 재촉하는 써니의 말소리가 들린다.")
+    game.fade_in()
     game.img("thony/greet.png")
     game.p("파이! 빨리 좀 와 설마 카페에 처음 와보는건 아니겠지?")
     game.n("닥달하면 뭐 빨라지는것도 아닌데...잔소리...")
@@ -132,6 +140,7 @@ def script(game):
     game.n("...........")
     game.background("moonlight3.jpg")
     game.n("달이 어느새 두사람을 바라보며 환하게 웃었다.")
+    game.fade_out()
 
 
     game.stage += 1
