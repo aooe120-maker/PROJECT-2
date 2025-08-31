@@ -1,13 +1,13 @@
 import time
 # 씬 정보
 name = "영화"
-stage = 0 # 작동하는 스테이지
+stage = 2 # 작동하는 스테이지
 req_like=(-100,'<') # (요구 호감도 , '<' : 이상 '>' 미만)
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
     # 화면에 보일 캐릭터 이미지 변경 (아무것도 없는 이미지파일 : blank.png)
- 
+    game.n("토요일")
     game.background("cgv.jpg")
     game.img("thony/grumpy.png")
     game.p("왜이렇게 늦어! 아주 습관성이야")

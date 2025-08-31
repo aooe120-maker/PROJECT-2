@@ -1,16 +1,22 @@
 import time
 # 씬 정보
 name = "교실"
-stage = 0 # 작동하는 스테이지
+stage = 1 # 작동하는 스테이지
 req_like=(200000,'<') # (요구 호감도 , '=' : 같을때 '<' : 같거나 높을때 '>' : 같거나 낮을때)
 is_couple=False # 커플일때만 발동되는 씬인지
 
 def script(game):
     game.fade_out()
+    game.n("월요일의 학교...")
+    game.n("늦게 잔 탓인지 조금은 피곤한거 같다...")
+    game.n("1교시 쉬는시간이 시작하자마자 반의 뒷문이 벌컥 열린다")
+    game.n("써니는 시끌벅적한 교실 틈을 비집고 내 앞으로 왔다")
     game.background("classroom.jpg")
     game.img("thony/idle1.png")
     game.fade_in()
+    game.n("진짜 바로 찾아오는구나...")
     game.p("안녕~ 좋은 아침이네?")
+    game.p("문제 풀 준비는 됐지..?")
     game.sel("혹시 라면 먹고 잤어? 얼굴이..", "니가 말걸어서 더 좋은아침.", "하암..졸리다 말걸지마")
     if game.choice == 1:
         game.p("응^^. 넌 소금을 퍼먹었니?")
@@ -69,7 +75,6 @@ def script(game):
         game.p("요즘 귀멸의 칼날 재밌다는데..")
         game.p("주말에 나랑 보러 가던가! 흥")
         game.like += 5
-    
     else:
         game.img("thony/idle1.png")
         game.p("아 정말 화가 끓어오른다..")
@@ -87,10 +92,28 @@ def script(game):
     game.me("그래 좋아. 영화보고 파이썬이나 실컷 공부하자")
     game.img("thony/disap.png")
     game.p("진짜 넌 사람 화나게 하는데 뭐 있다니까..")
-    game.me("(바보..그 영화 이미봤는데..)")
-
-
-
-    game.p("")
+    game.me("(..그 영화 이미봤는데..)")
+    game.n("어쩌면 이 바보한테 호감이 조금 생긴 것 같다")
+    game.img("thony/idle1.png")
+    game.p("아무튼 주말에 보는거다 알겠지?")
+    game.sel("좋아","음...")
+    if game.choice == 1:
+        game.img("thony/Brightly.png")
+        game.p("앗싸~")
+        game.n("웃는게 조금 귀여워 보였다")
+    if game.choice == 2:
+        game.img("thony/angry.png")
+        game.p("뭐야 그 석연치 않은 반응은!")
+        game.me("아아앗 알겠어 볼게 볼게")
+        game.img("thony/disap.png")
+        game.p("보기로 한거다")
+        game.me("알겠어 꼭 나올게")
+    game.n("쉬는시간의 끝을 알리는 종소리가 울렸다")
+    game.img("thony/idle1.png")
+    game.p("쉬는 시간이 벌써 끝났네")
+    game.p("그럼 가볼게~")
+    game.fade_out()
+    game.me("뭔가 문제 엄청 낼거같았는데 그런건 아니었네..")
+    game.n("학교를 끝마치고 집으로 왔다")
     game.stage += 1
     game.end()
