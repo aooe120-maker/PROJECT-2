@@ -67,8 +67,8 @@ def script(game):
     game.img("thony/idle1.png")
     game.p("나 요즘 다이어트 중이라 헬스 다녀")
     game.p("칼로리 계산을 부탁해!")
-    game.p("cal = '200', exercise = 300 \n print(exercise>cal)")
-    game.sel("1. True. 종아리 튼실해보이고 좋은데 왜?", "2. False. 지금 팔뚝 건강해보이고 좋은데 왜?","3. Error. 네가 뺄 살이 어디있어? 너 쓰러져")        
+    game.p("cal = '200', exercise = 300; print(exercise>cal)")
+    game.sel("True. 종아리 튼실해보이고 좋은데 왜?", "False. 지금 팔뚝 건강해보이고 좋은데 왜?","Error. 네가 뺄 살이 어디있어? 너 쓰러져")        
     if game.choice == 3:
         game.img("thony/idle1.png")
         game.p("..그런소리를 늘 듣긴해")
