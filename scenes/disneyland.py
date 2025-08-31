@@ -27,9 +27,7 @@ def script(game):
     game.n("전화가 뚝 끊겼지만 움직일 수 없었다.")
     game.n("데이트란 단어가 머리속에서 떠나지 않았다.")
     game.n("데이트... 데이트...")
-    
     game.n("얼른 준비하고 집을 나섰다.")
-
     game.background("train.jpg")
     game.p("야!!!파이!!!")
     game.n("기차안에서 써니가 나를 발견하고는 환하게 웃으며 손을 흔든다.")
@@ -42,10 +40,9 @@ def script(game):
     game.me("나도 오늘 하루종일 너랑 같이 있을 생각하니까 너무 좋아")
     game.n("간질거리는 설렘이 온몸을 감싸안았다.")
     game.p("그나저나 파이썬공부는 얼마나했어?")
-    
     game.sel("이말을 데이트때 해?","그보다 너오늘 너무 눈부셔 아..햇빛인가?","공부는 조금후에 해도괜찮아")
     if game.choice == 1:
-        game.like -= 20
+        game.like -= 10
         game.p("이말을 데이트때 해??")
         game.img("date/angry.png")
         game.p("넌 파이썬공부안해..?")
@@ -54,10 +51,9 @@ def script(game):
         game.p("아 뭐래~!")
         game.img("date/blush.png")
     elif game.choice == 3:
-        game.like += 20
+        game.like += 15
         game.p("맞아! 공부는 나중에 해도되지!")
         game.img("date/happy.png")
-
     game.n("기차는 계속해서 달려갔고, 결국 디즈니랜드에 도착했다.")
 
     game.background("disneyland.jpg")
