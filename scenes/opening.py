@@ -205,6 +205,7 @@ def script(game):
     answers = 0
     corrects = 0
     def answer(answer):
+        nonlocal answers, corrects
         if game.choice == answer:
             game.n("정답!")
             corrects += 1

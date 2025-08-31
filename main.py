@@ -193,6 +193,7 @@ class GameLoop:
         self.status = Status.IN_GAME
         self.bridge.state.mode = "idle"
         self.game.like = self.debug_like
+        self.game.stage = scene_obj.stage
         self.game.current_scene = scene_obj
         self.game.played_scenes.append(scene_obj)
 
