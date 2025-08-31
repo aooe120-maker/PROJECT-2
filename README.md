@@ -45,9 +45,8 @@
 - 호감도에 따른 엔딩이 다릅니다! 파이썬 공부를 열심히 하셨다면 해피엔딩 가능할지도?
 - 파이썬과 관련된 질문을 하니 준비 단단히 하시길...
 ### 릴리즈
-> 소스코드로 실행할시 pip install pygame후 main으로 진입하시면 됩니다  
-> ~(팀장)매일 새벽 3시까지 갈아넣으며 만들었습니다...~  
-> [게임 다운로드]((https://github.com/aooe120-maker/PROJECT-2/releases/tag/0.1))
+
+[게임 다운로드](https://github.com/aooe120-maker/PROJECT-2/releases/tag/0.1)
 
 ## 추가) 소스코드에서 직접 씬을 추가해보자!
 ### 씬 새로 만들기
