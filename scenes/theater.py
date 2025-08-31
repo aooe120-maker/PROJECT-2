@@ -68,10 +68,10 @@ def script(game):
     game.sel("조건 불충족", "조건 충족","에러발생")
     if game.choice == 2:
         game.other("오 저기 모델 같으신분! 정답입니다~","CGV직원")
-        game.backgorund("happy.png")
+        game.background("happy.png")
         game.p("대박! 앞으로 널 파이썬의 신으로 부를게")
         game.me("하하 좋아. 아~ 티켓 두장 맛있다.")
-        game.backgorun("ii.png")
+        game.background("ii.png")
         game.p("근데 저분 후하다 모델 이라니")
         game.me("미감이 훌륭하신거같아")
         game.like += 5
