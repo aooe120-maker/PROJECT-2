@@ -17,7 +17,7 @@
 </br>
 </br>
 
-#플레이 스크린샷
+# 스크린샷
 ![1](screenshot/1.png)
 ![2](screenshot/2.png)
 
