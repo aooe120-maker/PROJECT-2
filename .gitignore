@@ -1,1 +1,21 @@
+
 __pycache__
+
+# Virtual env
+.venv/
+venv/
+ENV/
+env/
+
+
+.vscode/
+
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Env files
+.env
+.env.*
+!.env.example
